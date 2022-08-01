@@ -60,13 +60,7 @@ class RegisterController extends Controller
     }
     
         
-        // $user = new User;
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-        // $user->password = Hash::make($request->password);
-        // $user->save();
-        // return response()->json(['success'=>'User created successfully.']);
-//funtion edit
+   
     public function edit($id, Request $request)
     {
         try{
