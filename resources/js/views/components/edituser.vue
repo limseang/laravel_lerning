@@ -78,9 +78,7 @@
                   <span class="flex-1 flex flex-col min-w-0">
                     <span class="text-gray-900 text-sm font-medium truncate">  <a v-for="seang in seang" :key="seang.firstname"  class="group flex items-center px-3 py-2 text-base leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50">
                        
-                        <span class="truncate">
-                          {{ seang.firstname }}{{seang.lastname}}
-                        </span>
+                      
                       </a></span>
                       <span v-for="seang in seang" :key="seang.possision" >
                       <span>
@@ -360,14 +358,15 @@ const projects = [
   // More projects...
 ]
 
-
-
+const email = ref('')
+const name = ref('')
 //edit user with id
 const edit = async (e) => {
     e.preventDefault()
-   axios.post(`/edit/user/${route.params.id}`,{
-    name: name,
-    email: email,
+   axios.post(`/edit/user/${route.params.id}` ,{
+    
+    email: email.value ,
+    name: name.value,
     password: route.params.password,
    }).then((response) => {
                return alert ('User updated')

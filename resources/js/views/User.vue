@@ -271,6 +271,7 @@ const seang = [
   { firstname: 'seang', lastname: 'lim', possision: 'admin' },
   
 ]
+const name = ref('')
 const deleteu =(id)=>{
   axios.post(`/delete/user/${id}/`,{
     params:{
