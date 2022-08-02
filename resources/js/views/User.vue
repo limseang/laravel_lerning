@@ -163,7 +163,34 @@
         <!-- Pinned projects -->
       
     
-
+ <div class="mt-10 pb-12 bg-white sm:pb-16">
+      <div class="relative">
+        <div class="absolute inset-0 h-1/2 bg-gray-50" />
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-7">
+          <div class="max-w-4xl mx-auto">
+            <dl class="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-4">
+              <div class="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
+                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Total User</dt>
+                <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{user.length}}</dd>
+              </div>
+              <div class="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
+                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">ABC</dt>
+                <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.abc}}</dd>
+              </div>
+              <div class="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
+                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Cambodia</dt>
+                <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.cambodia}}</dd>
+              </div>
+                <div class="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l">
+                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Ancher</dt>
+                <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.ancher}}</dd>
+              </div>
+             
+            </dl>
+          </div>
+        </div>
+      </div>
+      </div>
         <!-- Projects list (only on smallest breakpoint) -->
        <!-- This example requires Tailwind CSS v2.0+ -->
 
@@ -186,6 +213,7 @@
                   <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">Name</th>
                 
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
+                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Team</th>
                   
                   <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
                     <span class="sr-only">Edit</span>
@@ -200,6 +228,7 @@
                   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">{{ user.name }}</td>
                  
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ user.email }}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ user.team }}</td>
                  
                   <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
                     <a @click="edit(user.id)"  class="text-indigo-600 hover:text-indigo-900"
@@ -232,7 +261,7 @@
 
 import axios from 'axios'
 
-import { ref,onMounted } from 'vue'
+import { ref,onMounted,reactive } from 'vue'
 import { useRoute } from 'vue-router'
 import {
   Dialog,
@@ -259,6 +288,8 @@ const navigation = [
   { name: 'Recent', href: '#', icon: ClockIcon, current: false },
 ]
 
+
+
 const router = useRouter()
 
 const teams = [
@@ -271,7 +302,13 @@ const seang = [
   { firstname: 'seang', lastname: 'lim', possision: 'admin' },
   
 ]
+
 const name = ref('')
+const count = reactive({
+  abc: 0,
+  cambodia: 0,
+  ancher: 0,
+});
 const deleteu =(id)=>{
   axios.post(`/delete/user/${id}/`,{
     params:{
@@ -284,6 +321,38 @@ const deleteu =(id)=>{
     console.log(err)
   })
 }
+
+
+const countUser =() => {
+  axios.get('/count/user/').then(res=>{
+    count.abc = res.data.countAbc;
+    count.cambodia = res.data.countCambodia;
+    
+  }
+  )
+}
+
+const countUser2 =() => {
+  axios.get('/count2/user/').then(res=>{
+   
+    count.cambodia = res.data.countCambodia;
+  }).catch(err=>{
+    console.log(err)
+  })
+}
+
+const countUser3 =() => {
+  axios.get('/count3/user/').then(res=>{
+   
+    count.ancher = res.data.countAncher;
+  }).catch(err=>{
+    console.log(err)
+  })
+}
+
+
+
+
 
 
 const user = ref([]);
@@ -362,6 +431,9 @@ function edit(iduser) {
 
 onMounted(() => {
   getData();
+  countUser();
+  countUser2();
+  countUser3();
 
 })
 
