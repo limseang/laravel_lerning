@@ -218,7 +218,7 @@
                   <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
                     <span class="sr-only">Edit</span>
                   </th>
-
+ 
                 </tr>
               </thead>
             
@@ -240,18 +240,23 @@
                     <a href="" @click="deleteu(user.id)" class="text-indigo-600 hover:text-indigo-900"
                       >Delete<span class="sr-only"></span></a
                     >
+                    
                   </td>
                 </tr>
+               
               </tbody>
+              
             </table>
+            
           </div>
         </div>
+        
       </div>
     </div>
   </div>
 
         <!-- Projects table (small breakpoint and up) -->
-       
+       <Pagination class="mt-6" :links="user.length" />
       </main>
     </div>
   </div>
@@ -260,6 +265,7 @@
 <script setup>
 
 import axios from 'axios'
+import Pagination from './pagination.vue'
 
 import { ref,onMounted,reactive } from 'vue'
 import { useRoute } from 'vue-router'
@@ -409,7 +415,7 @@ const people = [
 
 const getData = () => {
   axios.get('/back-end/user').then(res => {
-    user.value = res.data.user;
+    user.value = res.data.user.data;
    
   })
 }

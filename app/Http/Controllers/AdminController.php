@@ -15,8 +15,8 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::all();
-        // return view('admin.index', compact('users'));
+       
+        $users = User::paginate(5);
         return response(['user'=>$users]);
     }
 

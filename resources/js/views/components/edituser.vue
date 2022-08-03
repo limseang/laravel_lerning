@@ -377,6 +377,7 @@ const edit = async (e) => {
     name: name.value,
     team: team.value,
     password: route.params.password,
+
    }).then((response) => {
                return alert ('User updated')
             }).catch((error) => {
