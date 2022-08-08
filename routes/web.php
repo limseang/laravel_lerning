@@ -45,6 +45,7 @@ Route::post('register',[RegisterController::class, 'register']);
 Route::post('login',[AdminLoginController::class, 'login']);
 
 Route::post('/edit/user/{id}', [RegisterController::class, 'edit']);
+Route::get('user/{id}', [AdminLoginController::class, 'show']);
 Route::get('/count/user/', [RegisterController::class, 'count']);
 Route::get('/count2/user/', [RegisterController::class, 'count2']);
 Route::get('/count3/user/', [RegisterController::class, 'count3']);

@@ -44,7 +44,7 @@
                 <span class="flex min-w-0 items-center justify-between space-x-3">
                   <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="" />
                   <span class="flex-1 flex flex-col min-w-0">
-                    <span class="text-gray-900 text-sm font-medium truncate">Admin</span>
+                    <span class="text-gray-900 text-sm font-medium truncate" >Admin</span>
                     <span class="text-gray-500 text-sm truncate"> @admin</span>
                   </span>
                 </span>
@@ -78,6 +78,7 @@
                   <a href="/admin/login" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Logout</a>
                 </MenuItem>
               </div>
+              
             </MenuItems>
           </transition>
         </Menu>
@@ -218,6 +219,8 @@
                   <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
                     <span class="sr-only">Edit</span>
                   </th>
+
+                  
  
                 </tr>
               </thead>
@@ -236,6 +239,14 @@
                     >
                     
                   </td>
+
+                       
+                  <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
+                    <a @click="viewuser(user.id)"  class="text-indigo-600 hover:text-indigo-900"
+                      >View Details </a
+                    >
+                    
+                  </td>
                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
                     <a href="" @click="deleteu(user.id)" class="text-indigo-600 hover:text-indigo-900"
                       >Delete<span class="sr-only"></span></a
@@ -245,18 +256,16 @@
                 </tr>
                
               </tbody>
-              
             </table>
             
           </div>
         </div>
-        
       </div>
     </div>
   </div>
 
         <!-- Projects table (small breakpoint and up) -->
-       <Pagination class="mt-6" :links="user.length" />
+      
       </main>
     </div>
   </div>
@@ -265,8 +274,6 @@
 <script setup>
 
 import axios from 'axios'
-import Pagination from './pagination.vue'
-
 import { ref,onMounted,reactive } from 'vue'
 import { useRoute } from 'vue-router'
 import {
@@ -354,6 +361,7 @@ const countUser3 =() => {
   }).catch(err=>{
     console.log(err)
   })
+
 }
 
 
@@ -361,8 +369,10 @@ const countUser3 =() => {
 
 
 
-const user = ref([]);
 
+
+const user = ref([]);
+const pagination = ref({});
 
 const projects = [
   {
@@ -416,6 +426,7 @@ const people = [
 const getData = () => {
   axios.get('/back-end/user').then(res => {
     user.value = res.data.user.data;
+    pagination.value = res.data;
    
   })
 }
@@ -429,6 +440,18 @@ function edit(iduser) {
         },
       })
     }
+
+function viewuser(iduser) {
+
+      router.push({
+        name: 'viewuser',
+       params: {
+          id:iduser,
+        },
+      })
+    }
+
+ 
 
  
 

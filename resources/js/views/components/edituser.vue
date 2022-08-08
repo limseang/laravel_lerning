@@ -233,19 +233,20 @@
         <!-- Projects table (small breakpoint and up) -->
           <form class="space-y-9 pl-9 pr-9 pt-9" action="" method="POST" >
         <input type="hidden" name="_token" :value="csrf">
-      
+    
          <div>
          
-            <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>
+            <label for="name" class="block text-sm font-medium text-gray-700" > Name </label>
             <div class="mt-1">
-              <input v-model="name" id="name" name="name" type="name" autocomplete="name" required="name" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  />
+              <input v-model="name" id="name" name="name" type="name" autocomplete='name' required="name" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  />
             </div>
           </div>
           <div>
          
+        
             <label for="email" class="block text-sm font-medium text-gray-700"> Email address </label>
             <div class="mt-1">
-              <input v-model="email" id="email" name="email" type="email" autocomplete="email" required="email" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+              <input v-model="email" id="email" name="email" type="email" autocomplete="email" required="email" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  />
             </div>
           </div>
 
@@ -262,11 +263,13 @@
       <option>Ancher</option>
     </select>
 </div>
+
           <div>
             <button @click="edit" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Update</button>
             <p>
             
             </p>
+            
           </div>
          
         </form>
@@ -302,7 +305,9 @@ import Header from '../components/header.vue'
 
 import Logo from './logo.vue'
 import Nav from './nav.vue'
-
+const email = ref('');
+const name = ref('');
+const team = ref('');
 
 const navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: true },
@@ -324,6 +329,7 @@ const seang = [
    
   }
 ]
+const users = ref([]);
 const projects = [
   {
     id: 1,
@@ -365,15 +371,29 @@ const projects = [
 ]
 
 
+const getData = () => {
+  axios.get(`/user/${route.params.id}`).then(res => {
+  
+   email.value = res.data.email;
+    name.value = res.data.name;
+    team.value = res.data.team;
+    console.log(res.data);
+    
+   
+   
+  })
+}
+
+
+
+
 //edit user with id
-const email = ref('')
-const name = ref('')
-const team = ref('')
+
 const edit = async (e) => {
     e.preventDefault()
    axios.post(`/edit/user/${route.params.id}` ,{
     
-    email: email.value ,
+    email: email.value,
     name: name.value,
     team: team.value,
     password: route.params.password,
@@ -386,9 +406,15 @@ const edit = async (e) => {
 
 }
 
-
-
-
-
 const sidebarOpen = ref(false)
+
+
+onMounted(() => {
+  getData(),
+  edit()
+
+  
+})
+
+
 </script>

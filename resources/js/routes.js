@@ -8,6 +8,7 @@ import Signup from './views/signup/signup.vue'
 import adduser from '../views/adduser/adduser.vue'
 import add from './views/add/add.vue'
 import edituser from './views/components/edituser.vue'
+import viewuser from './views/components/viewuser.vue'
 
 
 export default [
@@ -74,6 +75,11 @@ export default [
     name:'edituser',
     component: edituser,
 
+},
+{
+    path:'/admin/viewuser/:id',
+    name:'viewuser',
+    component: viewuser,
 }
 
 

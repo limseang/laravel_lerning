@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\Models\User as ModelsUser;
 
+use function GuzzleHttp\Promise\all;
+
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Auth;
 
 class AdminLoginController extends Controller
 {
@@ -48,10 +52,22 @@ class AdminLoginController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function show($id) 
     {
-        //
-    }
+        $user = User::where('id', $id)->first();
+        return response()->json($user);
+     }
+    // public function show($id)
+    // {
+    //     {
+    //         $user = new User();
+    //         $user = $user->where('id', $id)->first();
+            
+    //     }
+
+
+    // }
 
     /**
      * Show the form for editing the specified resource.

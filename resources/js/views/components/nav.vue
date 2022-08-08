@@ -31,10 +31,7 @@ import { AdjustmentsIcon, ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon
 export default {
   name: 'Nav',
 
- 
-  
-
-  }
+ }
 
 
     const teams = [
