@@ -1,6 +1,8 @@
 
 <template>
 
+
+
   <div class="min-h-full">
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog as="div" class="relative z-40 lg:hidden" @close="sidebarOpen = false">
@@ -20,7 +22,38 @@
                 </div>
               </TransitionChild>
              <Logo />
-        <router-link to="/"><Nav1 /></router-link>
+              <div class="mt-5 flex-1 h-0 overflow-y-auto">
+                <nav class="px-2">
+                  <div class="space-y-1">
+                    <nav class="px-3 mt-6" >
+          <div class="space-y-1">
+                
+                  </div>
+                  </nav>
+                    <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50', 'group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md']" :aria-current="item.current ? 'page' : undefined">
+                      <component :is="item.icon" :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
+                      {{ item.name }}
+                    </a>
+                  </div>
+                  <div class="mt-8">
+                    <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="mobile-teams-headline">Teams</h3>
+                    <div class="mt-1 space-y-1" role="group" aria-labelledby="mobile-teams-headline">
+                      <a v-for="team in teams" :key="team.name" :href="team.href" class="group flex items-center px-3 py-2 text-base leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50">
+                        <span :class="[team.bgColorClass, 'w-2.5 h-2.5 mr-4 rounded-full']" aria-hidden="true" />
+                        <span class="truncate">
+                          {{ team.name }}
+                        </span>
+                      </a>
+                        <a v-for="team in teams" :key="team.name" :href="team.href" class="group flex items-center px-3 py-2 text-base leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50">
+                        <span :class="[team.bgColorClass, 'w-2.5 h-2.5 mr-4 rounded-full']" aria-hidden="true" />
+                        <span class="truncate">
+                          {{ team.name }}
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </nav>
+              </div>
             </DialogPanel>
           </TransitionChild>
           <div class="flex-shrink-0 w-14" aria-hidden="true">
@@ -32,8 +65,7 @@
 
     <!-- Static sidebar for desktop -->
     <div class="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:border-r lg:border-gray-200 lg:pt-5 lg:pb-4 lg:bg-gray-100">
-    <Logo />
-  
+   <Logo />
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="mt-6 h-0 flex-1 flex flex-col overflow-y-auto">
         <!-- User account dropdown -->
@@ -44,8 +76,14 @@
                 <span class="flex min-w-0 items-center justify-between space-x-3">
                   <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="" />
                   <span class="flex-1 flex flex-col min-w-0">
-                    <span class="text-gray-900 text-sm font-medium truncate" >Admin</span>
-                    <span class="text-gray-500 text-sm truncate"> @admin</span>
+                    <span class="text-gray-900 text-sm font-medium truncate">  <a v-for="seang in seang" :key="seang.firstname"  class="group flex items-center px-3 py-2 text-base leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50">
+                       
+                      
+                      </a></span>
+                      <span v-for="seang in seang" :key="seang.possision" >
+                      <span>
+                      {{name}}</span></span>
+                    <span class="text-gray-500 text-sm truncate">{{email}}</span>
                   </span>
                 </span>
                 <SelectorIcon class="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
@@ -54,24 +92,46 @@
           </div>
           <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
             <MenuItems class="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
-        
-               
-             
+              <div class="py-1">
+                <MenuItem v-slot="{ active }">
+                  <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">View profile</a>
+                </MenuItem>
+                <MenuItem v-slot="{ active }">
+                  <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Settings</a>
+                </MenuItem>
+                <MenuItem v-slot="{ active }">
+                  <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Notifications</a>
+                </MenuItem>
+              </div>
+              <div class="py-1">
+                <MenuItem v-slot="{ active }">
+                  <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Get desktop app</a>
+                </MenuItem>
+                <MenuItem v-slot="{ active }">
+                  <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Support</a>
+                </MenuItem>
+              </div>
               <div class="py-1">
                 <MenuItem v-slot="{ active }">
                   <a href="/admin/login" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Logout</a>
                 </MenuItem>
               </div>
-              
             </MenuItems>
           </transition>
         </Menu>
         <!-- Sidebar Search -->
         <div class="px-3 mt-5">
-     
-          <Nav />
+          <label for="search" class="sr-only">Search</label>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none" aria-hidden="true">
+              <SearchIcon class="mr-3 h-4 w-4 text-gray-400" aria-hidden="true" />
+            </div>
+            <input type="text" name="search" id="search" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-9 sm:text-sm border-gray-300 rounded-md" placeholder="Search" />
+          </div>
+      
         </div>
         <!-- Navigation -->
+        <Nav />
       
       </div>
     </div>
@@ -136,129 +196,90 @@
           </div>
         </div>
       </div>
-      <main class="flex-1">
+      
+      <main class="flex-1 ">
         <!-- Page title & actions -->
-       <Header />
+     
+     
+      <Header />
+      
         <!-- Pinned projects -->
       
-    
- <div class="mt-10 pb-12 bg-white sm:pb-16">
-      <div class="relative">
-        <div class="absolute inset-0 h-1/2 bg-gray-50" />
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-7">
-          <div class="max-w-4xl mx-auto">
-            <dl class="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-4">
-              <div class="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
-                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Total User</dt>
-                <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{user.length}}</dd>
-              </div>
-              <div class="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
-                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">ABC</dt>
-                <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.abc}}</dd>
-              </div>
-              <div class="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
-                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Cambodia</dt>
-                <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.cambodia}}</dd>
-              </div>
-                <div class="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l">
-                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Ancher</dt>
-                <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.ancher}}</dd>
-              </div>
-             
-            </dl>
-          </div>
-        </div>
-      </div>
-      </div>
+
+
+          <br>
         <!-- Projects list (only on smallest breakpoint) -->
-       <!-- This example requires Tailwind CSS v2.0+ -->
-
-  <div class="px-4 sm:px-6 lg:px-8">
-    <div class="sm:flex sm:items-center">
-      <div class="sm:flex-auto">
-      <!--User Table-->
-      </div>
-  <font-awesome-icon icon="fa-brands fa-twitter" />
-    </div>
-    <div class="mt-8 flex flex-col">
-      <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="inline-block min-w-full py-2 align-middle">
-          <div class="overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5">
-            <table class="min-w-full divide-y divide-gray-300">
-              <thead class="bg-gray-50">
-                <tr  >
-               
-                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">ID</th>
-                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">Name</th>
-                
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
-                  
-                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Team</th>
-                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Function</th>
-
-                  
-                  <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
-                    <span class="sr-only">Edit</span>
-                  </th>
-
-                  
- 
-                </tr>
-              </thead>
-            
-              <tbody class="divide-y divide-gray-200 bg-white">
-                <tr v-for="user in user" >
-                 <td class="whitespace-nowrap px-9 py-4 text-sm text-gray-500">{{ user.id }}</td>
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">{{ user.name }}</td>
-                 
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ user.email }}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ user.team }}</td>
-                 
-                  <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                    <a @click="edit(user.id)"  class="text-indigo-600 hover:text-indigo-900"
-                      >Edit<span  class="sr-only"></span></a
-                    >
-                    
-                  </td>
-
-                       
-                  <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                    <a @click="viewuser(user.id)"  class="text-indigo-600 hover:text-indigo-900"
-                      >View Details </a
-                    >
-                    
-                  </td>
-                   <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                    <a href="" @click="deleteu(user.id)" class="text-indigo-600 hover:text-indigo-900"
-                      >Delete<span class="sr-only"></span></a
-                    >
-                    
-                  </td>
-                </tr>
-            
-              </tbody>
-            </table>
-            
+        <div class="mt-10 sm:hidden">
+          <div class="px-4 sm:px-6">
+            <h2 class="text-gray-500 text-xs font-medium uppercase tracking-wide">Projects</h2>
           </div>
+          <ul role="list" class="mt-3 border-t border-gray-200 divide-y divide-gray-100">
+            <li v-for="project in projects" :key="project.id">
+              <a href="#" class="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6">
+                <span class="flex items-center truncate space-x-3">
+                  <span :class="[project.bgColorClass, 'w-2.5 h-2.5 flex-shrink-0 rounded-full']" aria-hidden="true" />
+                  <span class="font-medium truncate text-sm leading-6">
+                    {{ project.title }}
+                    {{ ' ' }}
+                    <span class="truncate font-normal text-gray-500">in {{ project.team }}</span>
+                  </span>
+                </span>
+                <ChevronRightIcon class="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
+              </a>
+            </li>
+          </ul>
         </div>
-        
-      </div>
-    </div>
-  </div>
 
         <!-- Projects table (small breakpoint and up) -->
+     
+<div>
+ <form class="space-y-6" action="/login/dologin" method="POST">
+        <input type="hidden" name="_token" :value="csrf">
       
+         <div>
+         
+            <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>
+            <div class="mt-1">
+              <input v-model="name" id="name" name="name" type="name" autocomplete="name" required="" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  />
+            </div>
+          </div>
+         
+         <div>
+         
+            <label for="role" class="block text-sm font-medium text-gray-700"> Role </label>
+            <div class="mt-1">
+
+                <MultiSelect v-model="role" :options="permissionList" optionLabel="name" optionValue="code" placeholder="Select Role" display="chip" />
+
+            </div>
+          </div>
+
+        
+       
+          <div>
+            <button @click="edit" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create Function</button>
+            <p>
+            
+            </p>
+          </div>
+         
+        </form>
+
+</div>
+
+
+  <List />
+  
       </main>
     </div>
   </div>
 </template>
 
 <script setup>
-
+import MultiSelect from 'primevue/multiselect';
 import axios from 'axios'
-
-import { ref,onMounted,reactive } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onMounted} from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import {
   Dialog,
   DialogPanel,
@@ -273,75 +294,36 @@ import {
 import { ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon } from '@heroicons/vue/outline'
 
 import { ChevronRightIcon, DotsVerticalIcon, SearchIcon, SelectorIcon } from '@heroicons/vue/solid'
-import Logo from './components/logo.vue'
 import Nav from './components/nav.vue'
-import Header from './components/header.vue'
-import { useRouter } from 'vue-router'
+
+
+const name = ref('');
+const role = ref('');
+
+const permissionList = [
+    {name: 'User', code: 'User'},
+    {name: 'Admin', code: 'Admin'},
+   
+]
 
 const navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: true },
   { name: 'My tasks', href: '#', icon: ViewListIcon, current: false },
   { name: 'Recent', href: '#', icon: ClockIcon, current: false },
 ]
-const router = useRouter()
-const selectPermission = ref();
 
+const route = useRoute()
 
+const teams = [
+  { name: 'Engineering', href: '#', bgColorClass: 'bg-indigo-500' },
+  { name: 'Human Resources', href: '#', bgColorClass: 'bg-green-500' },
+  { name: 'Customer Success', href: '#', bgColorClass: 'bg-yellow-500' },
+]
 
-
-const count = reactive({
-  abc: 0,
-  cambodia: 0,
-  ancher: 0,
-});
-const deleteu =(id)=>{
-  axios.post(`/delete/user/${id}/`,{
-    params:{
-      id:id,
-      
-    }
-  }).then(res=>{
-    console.log(res)
-  }).catch(err=>{
-    console.log(err)
-  })
-}
-
-const countUser =() => {
-  axios.get('/count/user/').then(res=>{
-    count.abc = res.data.countAbc;
-    count.cambodia = res.data.countCambodia;
-    
-  }
-  )
-}
-
-const countUser2 =() => {
-  axios.get('/count2/user/').then(res=>{
-   
-    count.cambodia = res.data.countCambodia;
-  }).catch(err=>{
-    console.log(err)
-  })
-}
-
-const countUser3 =() => {
-  axios.get('/count3/user/').then(res=>{
-   
-    count.ancher = res.data.countAncher;
-  }).catch(err=>{
-    console.log(err)
-  })
-
-}
-
-const user = ref([]);
-const pagination = ref({});
 
 const projects = [
   {
     id: 1,
-   
     title: 'GraphQL API',
     initials: 'GA',
     team: 'Engineering',
@@ -372,62 +354,54 @@ const projects = [
       },
     ],
     totalMembers: 12,
-   
     lastUpdated: 'March 17, 2020',
     pinned: true,
     bgColorClass: 'bg-pink-600',
   },
   // More projects...
 ]
-const pinnedProjects = projects.filter((project) => project.pinned)
 
-const sidebarOpen = ref(false)
-const people = [
-  { name: user.name, email: user.email,  },
-  // More people...
-]
 
 const getData = () => {
-  axios.get('/back-end/user').then(res => {
-    user.value = res.data.user.data;
-    pagination.value = res.data;
+  axios.get(`/group/${route.params.id}`).then(res => {
+  
+  
+    name.value = res.data.name;
+    form.value =  res.data.role;
+   
+    
+   
    
   })
 }
 
-function edit(iduser) {
-  console.log(iduser)
-      router.push({
-        name: 'edituser',
-        params: {
-          id:iduser,
-        },
-      })
-    }
-
-function viewuser(iduser) {
-
-      router.push({
-        name: 'viewuser',
-       params: {
-          id:iduser,
-        },
-      })
-    }
-
- 
 
 
 
+
+//edit user with id
+const edit = async (e) => {
+    e.preventDefault()
+   axios.post(`/edit/group/${route.params.id}` ,{
+    
+ name : name.value,
+ role : role.value.join('#')
+
+   }).then((response) => {
+               return alert ('User updated')
+            }).catch((error) => {
+               return response.error
+            });
+
+}
+const sidebarOpen = ref(false)
 
 
 onMounted(() => {
-  getData();
- 
-  countUser();
-  countUser2();
-  countUser3();
+  getData(),
+  edit()
 
+  
 })
 
 

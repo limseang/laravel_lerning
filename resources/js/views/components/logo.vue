@@ -1,6 +1,6 @@
 <template>
  <div class="flex items-center flex-shrink-0 px-6">
-        <a href="" @click="home"><img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-purple-500-mark-gray-700-text.svg" alt="Workflow" /></a>
+        <a href="" @click="home"><font-awesome-icon icon="fa-brands fa-angellist"  size="4x"  /><span></span>User Manegerment</a>
       </div>
       
 
@@ -14,7 +14,7 @@ function home(e) {
   e.preventDefault()
 
       router.push({
-        name: 'admin.user',
+        name: 'dasboard',
        
       })
     }

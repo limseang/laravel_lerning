@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminLoginController;
-
+use App\Http\Controllers\FuntionController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,29 +29,63 @@ Route::get('/', function () {
 
 
 
-
+//user
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/back-end/user', [AdminController::class, 'index']);
+   
 });
 
 
-// Route::get('/login', function () {
-//     return view('login');
-// });
-
-// Route::get('/admin/user', [AdminController::class, 'index']);
-
-
-Route::post('register',[RegisterController::class, 'register']);
-Route::post('login',[AdminLoginController::class, 'login']);
-
 Route::post('/edit/user/{id}', [RegisterController::class, 'edit']);
+
 Route::get('user/{id}', [AdminLoginController::class, 'show']);
+
 Route::get('/count/user/', [RegisterController::class, 'count']);
 Route::get('/count2/user/', [RegisterController::class, 'count2']);
 Route::get('/count3/user/', [RegisterController::class, 'count3']);
 Route::post('/delete/user/{id}', [RegisterController::class, 'destroy']);
+
+Route::post('register',[RegisterController::class, 'register']);
+
+
+
+
+Route::post('login',[AdminLoginController::class, 'login']);
+
+
+Route::post('/create_role',[RoleController::class, 'create']);
+
+//FNT
+Route::post('/create_fnt',[FuntionController::class, 'create']);
+Route::get('/back-end/fnt', [FuntionController::class, 'index']);
+Route::post('/edit/fnt/{id}', [FuntionController::class, 'edit']);
+Route::get('fnt/{id}', [FuntionController::class, 'show']);
+Route::post('/delete/fnt/{id}', [FuntionController::class, 'destroy']);
+
+
+//Role
+Route::get('/back-end/role', [RoleController::class, 'index']);
+Route::post('/delete/role/{id}', [RoleController::class, 'destroy']);
+Route::get('role/{id}', [RoleController::class, 'show']);
+Route::post('/edit/role/{id}', [RoleController::class, 'edit']);
+Route::post('/create_role',[RoleController::class, 'create']);
+
+//Group
+
+Route::get('/back-end/group', [GroupController::class, 'index']);
+Route::post('/delete/group/{id}', [GroupController::class, 'destroy']);
+Route::get('group/{id}', [GroupController::class, 'show']);
+Route::post('/edit/group/{id}', [GroupController::class, 'edit']);
+Route::post('/create_group',[GroupController::class, 'create']);
+
+
+
+
+
+
+
+
 Route::get('logout', [RegisterController::class, 'logout'])->middleware('auth');
 
 
