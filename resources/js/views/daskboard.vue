@@ -150,7 +150,7 @@
                 <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{user.length}}</dd>
               </div>
               <div class="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
-                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">ABC</dt>
+                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Phnom Penh</dt>
                 <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.abc}}</dd>
               </div>
               <div class="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
@@ -158,15 +158,36 @@
                 <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.cambodia}}</dd>
               </div>
                 <div class="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l">
-                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Ancher</dt>
+                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">New York</dt>
                 <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.ancher}}</dd>
               </div>
              
             </dl>
-             <TreeSelect v-model="selectedNodes2" :options="nodes" display="chip" selectionMode="checkbox"  placeholder="Select Items"></TreeSelect>
+            <div class="pt-9 flex flex-row justify-between">
+            
+            <TreeSelect v-model="selectedNodes2"  display="chip" selectionMode="checkbox"  :options="nodes" value></TreeSelect>
+            <div>
+              {{nodeBinding}}
+            </div>
           </div>
+          
+          </div>
+          
         </div>
+       
       </div>
+       <table class="min-w-full divide-y divide-gray-300">
+              <thead class="bg-gray-50">
+               
+              </thead>
+            
+              <tbody class="divide-y divide-gray-200 bg-white">
+                <tr v-for="(selectedNodes2,index) in selectedNodes2">
+
+                </tr>
+              </tbody>
+
+            </table>
       </div>
         <!-- Projects list (only on smallest breakpoint) -->
        <!-- This example requires Tailwind CSS v2.0+ -->
@@ -191,7 +212,7 @@
 <script setup>
 
 import axios from 'axios'
-import { ref,onMounted,reactive } from 'vue'
+import { ref,onMounted,reactive, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import {
   Dialog,
@@ -217,7 +238,6 @@ const navigation = [
   { name: 'My tasks', href: '#', icon: ViewListIcon, current: false },
   { name: 'Recent', href: '#', icon: ClockIcon, current: false },
 ]
-
 
 
 const router = useRouter()
@@ -284,12 +304,119 @@ const countUser3 =() => {
 
 
 
-
-
+const selectedNodes2 = ref([])
 
 
 const user = ref([]);
 const pagination = ref({});
+
+const nodes = [
+        {
+          key:"0",
+          label:"Documents",
+          data:"Documents Folder",
+          icon:"pi pi-fw pi-inbox",
+          children: [
+            {
+              key: "0-0",
+              label: "Work",
+              data: "Work Folder",
+              icon: "pi pi-fw pi-cog",
+              children: []
+            },
+            {
+              key: "0-1",
+              label: "Family",
+              data: "Family Folder",
+              icon: "pi pi-fw pi-users",
+              children: []
+            },
+            {
+              key: "0-2",
+              label: "Home",
+              data: "Home Folder",
+              icon: "pi pi-fw pi-home",
+              children: []
+            }
+          ]
+        },
+          
+        {
+          key:"1",
+          label:"Pictures",
+          data:"Pictures Folder",
+          icon:"pi pi-fw pi-image",
+          children: [
+            {
+              key: "1-0",
+              label: "Sunset",
+              data: "Sunset Folder",
+              icon: "pi pi-fw pi-sun",
+              children: []
+            },
+            {
+              key: "1-1",
+              label: "Family",
+              data: "Family Folder",
+              icon: "pi pi-fw pi-users",
+              children: []
+            },
+            {
+              key: "1-2",
+              label: "Home",
+              data: "Home Folder",
+              icon: "pi pi-fw pi-home",
+              children: []
+            }
+          ]
+        },
+        {
+          key:"2",
+          label:"Movies",
+          data:"Movies Folder",
+          icon:"pi pi-fw pi-video",
+          children: [
+            {
+              key: "2-0",
+              label: "Al Pacino",
+              data: "Al Pacino Movies",
+              icon: "pi pi-fw pi-video",
+              children: []
+            },
+            {
+              key: "2-1",
+              label: "Robert De Niro",
+              data: "Robert De Niro Movies",
+              icon: "pi pi-fw pi-video",
+              children: []
+            },
+            {
+              key: "2-2",
+              label: "James Brown",
+              data: "James Brown Movies",
+              icon: "pi pi-fw pi-video",
+              children: []
+            }
+          ]
+        }
+        // {"key":"1","label":"Events","data":"Events Folder","icon":"pi pi-fw pi-calendar","children": [{ "key": "1-0", "label": "Meeting", "icon": "pi pi-fw pi-calendar-plus", "data": "Meeting" },{ "key": "1-1", "label": "Product Launch", "icon": "pi pi-fw pi-calendar-plus", "data": "Product Launch" },{ "key": "1-2", "label": "Report Review", "icon": "pi pi-fw pi-calendar-plus", "data": "Report Review" }]},
+        // {"key":"2","label":"Movies","data":"Movies Folder","icon":"pi pi-fw pi-star-fill","children": [{"key": "2-0","icon": "pi pi-fw pi-star-fill","label": "Al Pacino","data": "Pacino Movies","children": [{ "key": "2-0-0", "label": "Scarface", "icon": "pi pi-fw pi-video", "data": "Scarface Movie" }, { "key": "2-0-1", "label": "Serpico", "icon": "pi pi-fw pi-video", "data": "Serpico Movie" }]},{"key": "2-1","label": "Robert De Niro","icon": "pi pi-fw pi-star-fill","data": "De Niro Movies","children": [{ "key": "2-1-0", "label": "Goodfellas", "icon": "pi pi-fw pi-video", "data": "Goodfellas Movie" }, { "key": "2-1-1", "label": "Untouchables", "icon": "pi pi-fw pi-video", "data": "Untouchables Movie" }]}]},
+        // {"key":"3","label":"Pictures","data":"Pictures Folder","icon":"pi pi-fw pi-image","children": [{"key": "3-0","label": "Camera Roll","data": "Camera Roll","icon": "pi pi-fw pi-image","children": [{ "key": "3-0-0", "label": "golden-age.jpg", "icon": "pi pi-fw pi-image", "data": "golden-age.jpg" }, { "key": "3-0-1", "label": "golden-age2.jpg", "icon": "pi pi-fw pi-image", "data": "golden-age2.jpg" }]},{"key": "3-1","label": "2018","data": "2018 Folder","icon": "pi pi-fw pi-image","children": [{ "key": "3-1-0", "label": "fall.jpg", "icon": "pi pi-fw pi-image", "data": "fall.jpg" }, { "key": "3-1-1", "label": "spring.jpg", "icon": "pi pi-fw pi-image", "data": "spring.jpg" }]}]},
+        // {"key":"4","label":"Misc","data":"Misc Folder","icon":"pi pi-fw pi-file","children": [{"key": "4-0","label": "index.html","data": "index.html","icon": "pi pi-fw pi-file"}, {"key": "4-1","label": "license.txt","data": "license.txt","icon": "pi pi-fw pi-file"}]}
+]
+
+const nodeBinding = computed(() => {
+  let results = [];
+  nodes.forEach(parent => {
+    parent.children?.forEach(child => {
+      if(Object.keys(selectedNodes2.value).includes(child.key)) {
+        results = [...results,{data: `${parent.label}`,}];
+      }
+    });
+  });
+  return results;
+})
+
 
 const projects = [
   {
@@ -340,7 +467,7 @@ const people = [
   // More people...
 ]
 
-const selectedNodes2 = ref([])
+
 
 const getData = () => {
   axios.get('/back-end/user').then(res => {

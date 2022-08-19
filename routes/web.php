@@ -79,6 +79,10 @@ Route::get('group/{id}', [GroupController::class, 'show']);
 Route::post('/edit/group/{id}', [GroupController::class, 'edit']);
 Route::post('/create_group',[GroupController::class, 'create']);
 
+//group to role
+
+
+
 
 
 
