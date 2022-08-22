@@ -166,6 +166,8 @@
             <div class="pt-9 flex flex-row justify-between">
             
             <TreeSelect v-model="selectedNodes2"  display="chip" selectionMode="checkbox"  :options="nodes" value></TreeSelect>
+
+            
             <div>
               {{nodeBinding}}
             </div>

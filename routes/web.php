@@ -58,9 +58,11 @@ Route::post('/create_role',[RoleController::class, 'create']);
 
 //FNT
 Route::post('/create_fnt',[FuntionController::class, 'create']);
-Route::get('/back-end/fnt', [FuntionController::class, 'index']);
+Route::get('/back-end/fnt', [FuntionController::class, 'index']); 
+Route::get('/back-end/fnt2', [FuntionController::class, 'index2']);
 Route::post('/edit/fnt/{id}', [FuntionController::class, 'edit']);
 Route::get('fnt/{id}', [FuntionController::class, 'show']);
+Route::get('fnt/showAll', [FuntionController::class, 'showAll']);
 Route::post('/delete/fnt/{id}', [FuntionController::class, 'destroy']);
 
 
@@ -68,7 +70,7 @@ Route::post('/delete/fnt/{id}', [FuntionController::class, 'destroy']);
 Route::get('/back-end/role', [RoleController::class, 'index']);
 Route::post('/delete/role/{id}', [RoleController::class, 'destroy']);
 Route::get('role/{id}', [RoleController::class, 'show']);
-Route::post('/edit/role/{id}', [RoleController::class, 'edit']);
+
 Route::post('/create_role',[RoleController::class, 'create']);
 
 //Group
