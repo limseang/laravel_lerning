@@ -44,7 +44,7 @@
                 <span class="flex min-w-0 items-center justify-between space-x-3">
                   <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="" />
                   <span class="flex-1 flex flex-col min-w-0">
-                    <span class="text-gray-900 text-sm font-medium truncate" >Admin</span>
+                    <span class="text-gray-900 text-sm font-medium truncate" >Role</span>
                     <span class="text-gray-500 text-sm truncate"> @admin</span>
                   </span>
                 </span>
@@ -55,8 +55,6 @@
           <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
             <MenuItems class="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
         
-               
-             
               <div class="py-1">
                 <MenuItem v-slot="{ active }">
                   <a href="/admin/login" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Logout</a>
@@ -68,7 +66,7 @@
         </Menu>
         <!-- Sidebar Search -->
         <div class="px-3 mt-5">
-     
+        
           <Nav />
         </div>
         <!-- Navigation -->
@@ -138,38 +136,22 @@
       </div>
       <main class="flex-1">
         <!-- Page title & actions -->
-       <Header />
+       <div>
+       <div class="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+          <div class="flex-1 min-w-0">
+            <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">Home</h1>
+          </div>
+          <div class="mt-4 flex sm:mt-0 sm:ml-4">
+           
+            <button  @click="add_role" type="button" class="order-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3">Create Role</button>
+          </div>
+        </div>
+      
+       </div>
         <!-- Pinned projects -->
       
     
- <div class="mt-10 pb-12 bg-white sm:pb-16">
-      <div class="relative">
-        <div class="absolute inset-0 h-1/2 bg-gray-50" />
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-7">
-          <div class="max-w-4xl mx-auto">
-            <dl class="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-4">
-              <div class="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
-                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Total User</dt>
-                <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{user.length}}</dd>
-              </div>
-              <div class="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
-                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">ABC</dt>
-                <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.abc}}</dd>
-              </div>
-              <div class="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
-                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Cambodia</dt>
-                <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.cambodia}}</dd>
-              </div>
-                <div class="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l">
-                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Ancher</dt>
-                <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.ancher}}</dd>
-              </div>
-             
-            </dl>
-          </div>
-        </div>
-      </div>
-      </div>
+ 
         <!-- Projects list (only on smallest breakpoint) -->
        <!-- This example requires Tailwind CSS v2.0+ -->
 
@@ -178,9 +160,10 @@
       <div class="sm:flex-auto">
       <!--User Table-->
       </div>
-  <font-awesome-icon icon="fa-brands fa-twitter" />
+
+   
     </div>
-    <div class="mt-8 flex flex-col">
+   <div class="mt-8 flex flex-col">
       <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 align-middle">
           <div class="overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5">
@@ -188,14 +171,11 @@
               <thead class="bg-gray-50">
                 <tr  >
                
-                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">ID</th>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">ID</th>
                   <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">Name</th>
                 
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
-                  
-                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Team</th>
-                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Function</th>
-
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Permission</th>
+             
                   
                   <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
                     <span class="sr-only">Edit</span>
@@ -207,57 +187,65 @@
               </thead>
             
               <tbody class="divide-y divide-gray-200 bg-white">
-                <tr v-for="user in user" >
-                 <td class="whitespace-nowrap px-9 py-4 text-sm text-gray-500">{{ user.id }}</td>
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">{{ user.name }}</td>
+                <tr v-for="role in role" >
+                 <td class="whitespace-nowrap px-9 py-4 text-sm text-gray-500">{{ role.id }}</td>
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">{{ role.name }}</td>
                  
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ user.email }}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ user.team }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ role.fnt }}</td>
+                  
                  
-                  <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                    <a @click="edit(user.id)"  class="text-indigo-600 hover:text-indigo-900"
+                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
+                    <a @click="editrole(role.id)"  class="text-indigo-600 hover:text-indigo-900"
                       >Edit<span  class="sr-only"></span></a
                     >
                     
                   </td>
 
-                       
-                  <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                    <a @click="viewuser(user.id)"  class="text-indigo-600 hover:text-indigo-900"
-                      >View Details </a
-                    >
-                    
-                  </td>
+                
                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                    <a href="" @click="deleteu(user.id)" class="text-indigo-600 hover:text-indigo-900"
-                      >Delete<span class="sr-only"></span></a
+                    <a href="" @click="deleteu(role.id)"  class="text-indigo-600 hover:text-indigo-900"
+                      >Delete<span class="sr-only"><h1 v-if="deleteu">Vue is awesome!</h1>
+</span></a
                     >
                     
                   </td>
+                  
+             <!-- This example requires Tailwind CSS v2.0+ -->
+
+ 
+
+
+
+
+           
                 </tr>
-            
+                
+               
               </tbody>
             </table>
             
           </div>
         </div>
-        
       </div>
     </div>
+   
   </div>
+
 
         <!-- Projects table (small breakpoint and up) -->
       
       </main>
+      
     </div>
+    
   </div>
 </template>
 
 <script setup>
 
 import axios from 'axios'
-
 import { ref,onMounted,reactive } from 'vue'
+import { CheckCircleIcon } from '@heroicons/vue/solid'
 import { useRoute } from 'vue-router'
 import {
   Dialog,
@@ -278,64 +266,90 @@ import Nav from './components/nav.vue'
 import Header from './components/header.vue'
 import { useRouter } from 'vue-router'
 
+const role = ref([]);
+
 const navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: true },
   { name: 'My tasks', href: '#', icon: ViewListIcon, current: false },
   { name: 'Recent', href: '#', icon: ClockIcon, current: false },
 ]
+
+function add_role() {
+
+      router.push({
+        name: 'add_role',
+       
+      })
+    }
+const deleteu =(id)=>{
+  axios.post(`/delete/role/${id}/`,{
+    params:{
+      id:id,
+      
+    }
+  })
+  if(deleteu){
+   alert('这是一段内容', '标题名称', {
+    confirmButtonText: '确定',
+    callback: action => {
+      
+    }
+  });
+  };
+ 
+  }
+    const getData = () => {
+  axios.get('/back-end/role').then(res => {
+    role.value = res.data.fnt;
+    pagination.value = res.data;
+   
+  })
+}
+
+
 const router = useRouter()
-const selectPermission = ref();
+
+const teams = [
+  { name: 'Engineering', href: '#', bgColorClass: 'bg-indigo-500' },
+  { name: 'Human Resources', href: '#', bgColorClass: 'bg-green-500' },
+  { name: 'Customer Success', href: '#', bgColorClass: 'bg-yellow-500' },
+]
+
+const seang = [
+  { firstname: 'seang', lastname: 'lim', possision: 'admin' },
+  
+]
+
+function editrole(idrole) {
+  console.log(idrole)
+      router.push({
+        name: 'edit_role',
+        params: {
+          id:idrole,
+        },
+      })
+     
+    }
 
 
-
-
+const name = ref('')
 const count = reactive({
   abc: 0,
   cambodia: 0,
   ancher: 0,
 });
-const deleteu =(id)=>{
-  axios.post(`/delete/user/${id}/`,{
-    params:{
-      id:id,
-      
-    }
-  }).then(res=>{
-    console.log(res)
-  }).catch(err=>{
-    console.log(err)
-  })
-}
 
-const countUser =() => {
-  axios.get('/count/user/').then(res=>{
-    count.abc = res.data.countAbc;
-    count.cambodia = res.data.countCambodia;
-    
-  }
-  )
-}
 
-const countUser2 =() => {
-  axios.get('/count2/user/').then(res=>{
-   
-    count.cambodia = res.data.countCambodia;
-  }).catch(err=>{
-    console.log(err)
-  })
-}
 
-const countUser3 =() => {
-  axios.get('/count3/user/').then(res=>{
-   
-    count.ancher = res.data.countAncher;
-  }).catch(err=>{
-    console.log(err)
-  })
 
-}
 
-const user = ref([]);
+
+
+
+
+
+
+
 const pagination = ref({});
 
 const projects = [
@@ -382,28 +396,10 @@ const projects = [
 const pinnedProjects = projects.filter((project) => project.pinned)
 
 const sidebarOpen = ref(false)
-const people = [
-  { name: user.name, email: user.email,  },
-  // More people...
-]
 
-const getData = () => {
-  axios.get('/back-end/user').then(res => {
-    user.value = res.data.user.data;
-    pagination.value = res.data;
-   
-  })
-}
 
-function edit(iduser) {
-  console.log(iduser)
-      router.push({
-        name: 'edituser',
-        params: {
-          id:iduser,
-        },
-      })
-    }
+
+
 
 function viewuser(iduser) {
 
@@ -416,7 +412,17 @@ function viewuser(iduser) {
     }
 
  
+function deletefnt(idfnt) {
+  console.log(idfnt)
+      router.push({
+        name: 'deletefnt',
+        params: {
+          id:idfnt,
+        },
+      })
+    }
 
+ 
 
 
 
@@ -424,9 +430,6 @@ function viewuser(iduser) {
 onMounted(() => {
   getData();
  
-  countUser();
-  countUser2();
-  countUser3();
 
 })
 

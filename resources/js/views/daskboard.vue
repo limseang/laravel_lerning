@@ -54,10 +54,8 @@
           </div>
           <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
             <MenuItems class="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
-        
-               
-             
               <div class="py-1">
+            
                 <MenuItem v-slot="{ active }">
                   <a href="/admin/login" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Logout</a>
                 </MenuItem>
@@ -67,10 +65,9 @@
           </transition>
         </Menu>
         <!-- Sidebar Search -->
-        <div class="px-3 mt-5">
      
           <Nav />
-        </div>
+        
         <!-- Navigation -->
       
       </div>
@@ -153,7 +150,7 @@
                 <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{user.length}}</dd>
               </div>
               <div class="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
-                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">ABC</dt>
+                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Phnom Penh</dt>
                 <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.abc}}</dd>
               </div>
               <div class="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
@@ -161,14 +158,36 @@
                 <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.cambodia}}</dd>
               </div>
                 <div class="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l">
-                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Ancher</dt>
+                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">New York</dt>
                 <dd class="order-1 text-5xl font-extrabold text-indigo-600">{{count.ancher}}</dd>
               </div>
              
             </dl>
+            <div class="pt-9 flex flex-row justify-between">
+            
+            <TreeSelect v-model="selectedNodes2"  display="chip" selectionMode="checkbox"  :options="nodes" value></TreeSelect>
+            <div>
+              {{nodeBinding}}
+            </div>
           </div>
+          
+          </div>
+          
         </div>
+       
       </div>
+       <table class="min-w-full divide-y divide-gray-300">
+              <thead class="bg-gray-50">
+               
+              </thead>
+            
+              <tbody class="divide-y divide-gray-200 bg-white">
+                <tr v-for="(selectedNodes2,index) in selectedNodes2">
+
+                </tr>
+              </tbody>
+
+            </table>
       </div>
         <!-- Projects list (only on smallest breakpoint) -->
        <!-- This example requires Tailwind CSS v2.0+ -->
@@ -178,71 +197,8 @@
       <div class="sm:flex-auto">
       <!--User Table-->
       </div>
-  <font-awesome-icon icon="fa-brands fa-twitter" />
-    </div>
-    <div class="mt-8 flex flex-col">
-      <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="inline-block min-w-full py-2 align-middle">
-          <div class="overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5">
-            <table class="min-w-full divide-y divide-gray-300">
-              <thead class="bg-gray-50">
-                <tr  >
-               
-                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">ID</th>
-                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">Name</th>
-                
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
-                  
-                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Team</th>
-                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Function</th>
-
-                  
-                  <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
-                    <span class="sr-only">Edit</span>
-                  </th>
-
-                  
- 
-                </tr>
-              </thead>
-            
-              <tbody class="divide-y divide-gray-200 bg-white">
-                <tr v-for="user in user" >
-                 <td class="whitespace-nowrap px-9 py-4 text-sm text-gray-500">{{ user.id }}</td>
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">{{ user.name }}</td>
-                 
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ user.email }}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ user.team }}</td>
-                 
-                  <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                    <a @click="edit(user.id)"  class="text-indigo-600 hover:text-indigo-900"
-                      >Edit<span  class="sr-only"></span></a
-                    >
-                    
-                  </td>
-
-                       
-                  <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                    <a @click="viewuser(user.id)"  class="text-indigo-600 hover:text-indigo-900"
-                      >View Details </a
-                    >
-                    
-                  </td>
-                   <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                    <a href="" @click="deleteu(user.id)" class="text-indigo-600 hover:text-indigo-900"
-                      >Delete<span class="sr-only"></span></a
-                    >
-                    
-                  </td>
-                </tr>
-            
-              </tbody>
-            </table>
-            
-          </div>
-        </div>
-        
-      </div>
+   
+   
     </div>
   </div>
 
@@ -256,8 +212,7 @@
 <script setup>
 
 import axios from 'axios'
-
-import { ref,onMounted,reactive } from 'vue'
+import { ref,onMounted,reactive, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import {
   Dialog,
@@ -283,12 +238,22 @@ const navigation = [
   { name: 'My tasks', href: '#', icon: ViewListIcon, current: false },
   { name: 'Recent', href: '#', icon: ClockIcon, current: false },
 ]
+
+
 const router = useRouter()
-const selectPermission = ref();
 
+const teams = [
+  { name: 'Engineering', href: '#', bgColorClass: 'bg-indigo-500' },
+  { name: 'Human Resources', href: '#', bgColorClass: 'bg-green-500' },
+  { name: 'Customer Success', href: '#', bgColorClass: 'bg-yellow-500' },
+]
 
+const seang = [
+  { firstname: 'seang', lastname: 'lim', possision: 'admin' },
+  
+]
 
-
+const name = ref('')
 const count = reactive({
   abc: 0,
   cambodia: 0,
@@ -306,6 +271,7 @@ const deleteu =(id)=>{
     console.log(err)
   })
 }
+
 
 const countUser =() => {
   axios.get('/count/user/').then(res=>{
@@ -335,8 +301,122 @@ const countUser3 =() => {
 
 }
 
+
+
+
+const selectedNodes2 = ref([])
+
+
 const user = ref([]);
 const pagination = ref({});
+
+const nodes = [
+        {
+          key:"0",
+          label:"Documents",
+          data:"Documents Folder",
+          icon:"pi pi-fw pi-inbox",
+          children: [
+            {
+              key: "0-0",
+              label: "Work",
+              data: "Work Folder",
+              icon: "pi pi-fw pi-cog",
+              children: []
+            },
+            {
+              key: "0-1",
+              label: "Family",
+              data: "Family Folder",
+              icon: "pi pi-fw pi-users",
+              children: []
+            },
+            {
+              key: "0-2",
+              label: "Home",
+              data: "Home Folder",
+              icon: "pi pi-fw pi-home",
+              children: []
+            }
+          ]
+        },
+          
+        {
+          key:"1",
+          label:"Pictures",
+          data:"Pictures Folder",
+          icon:"pi pi-fw pi-image",
+          children: [
+            {
+              key: "1-0",
+              label: "Sunset",
+              data: "Sunset Folder",
+              icon: "pi pi-fw pi-sun",
+              children: []
+            },
+            {
+              key: "1-1",
+              label: "Family",
+              data: "Family Folder",
+              icon: "pi pi-fw pi-users",
+              children: []
+            },
+            {
+              key: "1-2",
+              label: "Home",
+              data: "Home Folder",
+              icon: "pi pi-fw pi-home",
+              children: []
+            }
+          ]
+        },
+        {
+          key:"2",
+          label:"Movies",
+          data:"Movies Folder",
+          icon:"pi pi-fw pi-video",
+          children: [
+            {
+              key: "2-0",
+              label: "Al Pacino",
+              data: "Al Pacino Movies",
+              icon: "pi pi-fw pi-video",
+              children: []
+            },
+            {
+              key: "2-1",
+              label: "Robert De Niro",
+              data: "Robert De Niro Movies",
+              icon: "pi pi-fw pi-video",
+              children: []
+            },
+            {
+              key: "2-2",
+              label: "James Brown",
+              data: "James Brown Movies",
+              icon: "pi pi-fw pi-video",
+              children: []
+            }
+          ]
+        }
+        // {"key":"1","label":"Events","data":"Events Folder","icon":"pi pi-fw pi-calendar","children": [{ "key": "1-0", "label": "Meeting", "icon": "pi pi-fw pi-calendar-plus", "data": "Meeting" },{ "key": "1-1", "label": "Product Launch", "icon": "pi pi-fw pi-calendar-plus", "data": "Product Launch" },{ "key": "1-2", "label": "Report Review", "icon": "pi pi-fw pi-calendar-plus", "data": "Report Review" }]},
+        // {"key":"2","label":"Movies","data":"Movies Folder","icon":"pi pi-fw pi-star-fill","children": [{"key": "2-0","icon": "pi pi-fw pi-star-fill","label": "Al Pacino","data": "Pacino Movies","children": [{ "key": "2-0-0", "label": "Scarface", "icon": "pi pi-fw pi-video", "data": "Scarface Movie" }, { "key": "2-0-1", "label": "Serpico", "icon": "pi pi-fw pi-video", "data": "Serpico Movie" }]},{"key": "2-1","label": "Robert De Niro","icon": "pi pi-fw pi-star-fill","data": "De Niro Movies","children": [{ "key": "2-1-0", "label": "Goodfellas", "icon": "pi pi-fw pi-video", "data": "Goodfellas Movie" }, { "key": "2-1-1", "label": "Untouchables", "icon": "pi pi-fw pi-video", "data": "Untouchables Movie" }]}]},
+        // {"key":"3","label":"Pictures","data":"Pictures Folder","icon":"pi pi-fw pi-image","children": [{"key": "3-0","label": "Camera Roll","data": "Camera Roll","icon": "pi pi-fw pi-image","children": [{ "key": "3-0-0", "label": "golden-age.jpg", "icon": "pi pi-fw pi-image", "data": "golden-age.jpg" }, { "key": "3-0-1", "label": "golden-age2.jpg", "icon": "pi pi-fw pi-image", "data": "golden-age2.jpg" }]},{"key": "3-1","label": "2018","data": "2018 Folder","icon": "pi pi-fw pi-image","children": [{ "key": "3-1-0", "label": "fall.jpg", "icon": "pi pi-fw pi-image", "data": "fall.jpg" }, { "key": "3-1-1", "label": "spring.jpg", "icon": "pi pi-fw pi-image", "data": "spring.jpg" }]}]},
+        // {"key":"4","label":"Misc","data":"Misc Folder","icon":"pi pi-fw pi-file","children": [{"key": "4-0","label": "index.html","data": "index.html","icon": "pi pi-fw pi-file"}, {"key": "4-1","label": "license.txt","data": "license.txt","icon": "pi pi-fw pi-file"}]}
+]
+
+const nodeBinding = computed(() => {
+  let results = [];
+  nodes.forEach(parent => {
+    parent.children?.forEach(child => {
+      if(Object.keys(selectedNodes2.value).includes(child.key)) {
+        results = [...results,{data: `${parent.label}`,}];
+      }
+    });
+  });
+  return results;
+})
+
 
 const projects = [
   {
@@ -387,6 +467,8 @@ const people = [
   // More people...
 ]
 
+
+
 const getData = () => {
   axios.get('/back-end/user').then(res => {
     user.value = res.data.user.data;
@@ -417,13 +499,13 @@ function viewuser(iduser) {
 
  
 
+ 
 
 
 
 
 onMounted(() => {
   getData();
- 
   countUser();
   countUser2();
   countUser3();

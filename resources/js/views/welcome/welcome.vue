@@ -161,7 +161,7 @@
        <Header />
         <!-- Pinned projects -->
        
-      
+   
 
         <!-- Projects list (only on smallest breakpoint) -->
       
@@ -169,8 +169,10 @@
         <!-- Projects table (small breakpoint and up) -->
      
       </main>
+     
     </div>
   </div>
+  
 </template>
 
 <script setup>
