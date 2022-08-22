@@ -29,7 +29,8 @@ class FuntionController extends Controller
 
     public function index2(Request $request)
     {
-        $fnt = Fnt::select('id as key' , 'name as label')->get();
+        $fnt = Fnt::select('id as key' , 'name as label' ,'permission as children', )->get();
+        
         return response(['fnt'=>$fnt]);
     }
     //delete fnt in table function

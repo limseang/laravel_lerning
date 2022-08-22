@@ -381,6 +381,7 @@ import Header from '../components/header.vue'
 
 import Logo from './logo.vue'
 import Nav from './nav.vue'
+import { faChildren } from '@fortawesome/free-solid-svg-icons'
 const email = ref('');
 const permission = ref('');
 
@@ -476,6 +477,7 @@ const getData = () => {
   axios.get('/back-end/fnt2').then(res => {
     fnt.value = res.data.fnt;
     pagination.value = res.data;
+    
    
   })
 }
