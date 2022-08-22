@@ -19,7 +19,7 @@ import group from './views/group.vue'
 import editrole from './views/edit_role.vue'
 import editgroup from './views/edit_group.vue'
 import deletefnt from './views/components/alert.vue'
-import Daskboard from '/Users/popcorn/Desktop/seang_laravel/resources/js/views/daskboard.vue'
+import Daskboard from './views/daskboard.vue'
 
 
 export default [
