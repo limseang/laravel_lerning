@@ -329,11 +329,15 @@
             </select>
           </div>
           <div>
+            <div class="space-x-2">
+              <span class="px-3 py-2 bg-green-500 rounded text-white shadow-lg" v-for="item in nodeBinding" :key="item.id">{{item.name}} : {{item.permission}}</span>
+            </div>
+           
+          </div>
+          <div>
              <label for="permission" name="permission" class="block text-sm font-medium text-gray-700"> Functions </label>
             <div>
-           
-           
-             <TreeSelect v-model="permission"  display="chip" selectionMode="checkbox"   :options="fnt" value></TreeSelect>
+             <TreeSelect v-model="permission"  display="" selectionMode="checkbox"   :options="fnt" value></TreeSelect>
           </div>
           <div>
           </div>
@@ -359,7 +363,7 @@
 
 <script setup>
 import axios from 'axios'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import {
   Dialog,
@@ -383,18 +387,17 @@ import Logo from './logo.vue'
 import Nav from './nav.vue'
 import { faChildren } from '@fortawesome/free-solid-svg-icons'
 const email = ref('');
-const permission = ref('');
+const permission = ref([
+ 
+]);
 
 const name = ref('');
 const team = ref('');
-const fnt = ref([]);
+const fnt = ref([
 
-const permissionList = [
-    {name: name.value, code: 'VIEW'},
-    {name: permission.value, code: 'READ'},
-   
-   
-];
+]);
+
+
 
 const navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: true },
@@ -416,7 +419,6 @@ const seang = [
 
   }
 ]
-const users = ref([]);
 const projects = [
   {
     id: 1,
@@ -473,15 +475,30 @@ const getData = () => {
 
 
 // get fnt by id
-    const getfnt = () => {
+const getfnt = () => {
   axios.get('/back-end/fnt2').then(res => {
-    fnt.value = res.data.fnt;
-    pagination.value = res.data;
-    
-   
+   fnt.value = res.data.fnt;
   })
 }
 
+
+
+const nodeBinding = computed(() => {
+  let results = [];
+  fnt.value.forEach(parent => {
+    let permissions = '';
+    let func = null;
+    parent.children.forEach((child,index) => {
+      if(Object.keys(permission.value).includes(child.key)) {
+        permissions = permissions + (index !=0 ? "#"+child.label : child.label);
+        func = {id: parent.key, name: parent.label, permission: permissions};
+      }
+    });
+    results.push(func);
+  })
+  return results.filter(item => item != null);
+}
+)
 
 
 
@@ -509,11 +526,7 @@ const sidebarOpen = ref(false)
 
 onMounted(() => {
   getfnt()
-  getData(),
-  
-    edit()
-
-
+  getData()
 })
 
 

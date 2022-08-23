@@ -32,9 +32,11 @@ Route::get('/', function () {
 //user
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/back-end/user', [AdminController::class, 'index']);
+  
    
 });
+
+Route::get('/back-end/user', [AdminController::class, 'index']);
 
 
 Route::post('/edit/user/{id}', [RegisterController::class, 'edit']);

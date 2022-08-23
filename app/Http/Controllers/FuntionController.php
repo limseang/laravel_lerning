@@ -29,8 +29,23 @@ class FuntionController extends Controller
 
     public function index2(Request $request)
     {
-        $fnt = Fnt::select('id as key' , 'name as label' ,'permission as children', )->get();
-        
+        $fnt = Fnt::select('id as key' , 'name as label', 'name as data','permission')->get();
+        // [
+        //     {key:1, label:'admin', data:'admin',children:''},
+        // ]
+        $fnt->map(function ($item) {
+            $permissions = explode('#', $item->permission);
+            $permissionObject = [];
+            foreach ($permissions as $key => $value) {
+                $permissionObject[] = [
+                    'key' => $item->key."-".$key,
+                    'label' => $value,
+                    'data' => $value,
+                ];                
+            }
+            $item->children = $permissionObject;
+            return $item;
+        });
         return response(['fnt'=>$fnt]);
     }
     //delete fnt in table function
