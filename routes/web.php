@@ -33,10 +33,10 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth']], function () {
   
-   
+    Route::get('/back-end/user', [AdminController::class, 'index']);
 });
 
-Route::get('/back-end/user', [AdminController::class, 'index']);
+
 
 
 Route::post('/edit/user/{id}', [RegisterController::class, 'edit']);
@@ -71,13 +71,16 @@ Route::post('/delete/fnt/{id}', [FuntionController::class, 'destroy']);
 //Role
 Route::get('/back-end/role', [RoleController::class, 'index']);
 Route::post('/delete/role/{id}', [RoleController::class, 'destroy']);
+Route::get('/back-end/role2', [RoleController::class, 'index2']); 
 Route::get('role/{id}', [RoleController::class, 'show']);
+Route::get('role/showAll', [RoleController::class, 'showAll']);
 
 Route::post('/create_role',[RoleController::class, 'create']);
 
 //Group
 
 Route::get('/back-end/group', [GroupController::class, 'index']);
+Route::get('/back-end/grouplist', [GroupController::class, 'index2']);
 Route::post('/delete/group/{id}', [GroupController::class, 'destroy']);
 Route::get('group/{id}', [GroupController::class, 'show']);
 Route::post('/edit/group/{id}', [GroupController::class, 'edit']);

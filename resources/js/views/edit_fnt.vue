@@ -233,7 +233,7 @@
         <!-- Projects table (small breakpoint and up) -->
      
 <div>
- <form class="space-y-6" action="/login/dologin" method="POST">
+ <form class="space-y-12  px-9 py-9" action="/login/dologin" method="POST">
         <input type="hidden" name="_token" :value="csrf">
       
          <div>
@@ -257,7 +257,7 @@
      
        
           <div>
-            <button @click="edit" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create Function</button>
+            <button @click="edit" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Update Function</button>
             <p>
             
             </p>

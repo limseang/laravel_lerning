@@ -233,7 +233,7 @@
         <!-- Projects table (small breakpoint and up) -->
      
 <div>
- <form class="space-y-6" action="/login/dologin" method="POST">
+ <form class="space-y-12  px-9 py-9" action="/login/dologin" method="POST">
         <input type="hidden" name="_token" :value="csrf">
       
          <div>
@@ -243,21 +243,27 @@
               <input v-model="name" id="name" name="name" type="name" autocomplete="name" required="" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  />
             </div>
           </div>
+            <div class="space-x-2">
+              <span class="px-3 py-2 bg-green-500 rounded text-white shadow-lg" v-for="item in nodeBinding" :key="item.id">{{item.name}} : {{item.permission}}</span>
+            </div>
          
          <div>
          
-            <label for="fnt" class="block text-sm font-medium text-gray-700"> permission </label>
-            <div class="mt-1">
-
-                <MultiSelect v-model="fnt" :options="fntList" optionLabel="name" optionValue="code" placeholder="Select Function" display="chip" />
-
-            </div>
+           
+             <div>
+             <label for="permission" name="permission" class="block text-sm font-medium text-gray-700"> Functions </label>
+            <div>
+             <TreeSelect v-model="permission"  display="" selectionMode="checkbox"   :options="fnt" value></TreeSelect>
+          </div>
+          <div>
+          </div>
+          </div>
           </div>
 
         
        
           <div>
-            <button @click="edit" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create Function</button>
+            <button @click="edit" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Update Role</button>
             <p>
             
             </p>
@@ -278,7 +284,7 @@
 <script setup>
 import MultiSelect from 'primevue/multiselect';
 import axios from 'axios'
-import { ref, onMounted} from 'vue'
+import { ref, onMounted,computed} from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import {
   Dialog,
@@ -296,17 +302,17 @@ import { ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon } from '@heroico
 import { ChevronRightIcon, DotsVerticalIcon, SearchIcon, SelectorIcon } from '@heroicons/vue/solid'
 import Nav from './components/nav.vue'
 
+const permission = ref([
+ 
+]);
 
 const name = ref('');
-const fnt = ref('');
+const team = ref('');
+const fnt = ref([]);
 
-const fntList = [
-    {name: 'View', code: 'VIEW'},
-    {name: 'Read', code: 'READ'},
-    {name: 'Upadte', code: 'UPD'},
-    {name: 'Delete', code: 'DEL'},
-   
-];
+
+
+
 
 const navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: true },
@@ -378,6 +384,30 @@ const getData = () => {
 }
 
 
+const getfnt = () => {
+  axios.get('/back-end/fnt2').then(res => {
+   fnt.value = res.data.fnt;
+  })
+}
+
+
+
+const nodeBinding = computed(() => {
+  let results = [];
+  fnt.value.forEach(parent => {
+    let permissions = '';
+    let func = null;
+    parent.children.forEach((child,index) => {
+      if(Object.keys(permission.value).includes(child.key)) {
+        permissions = permissions + (index !=0 ? "#"+child.label : child.label);
+        func = {id: parent.key, name: parent.label, permission: permissions};
+      }
+    });
+    results.push(func);
+  })
+  return results.filter(item => item != null);
+}
+)
 
 
 
@@ -400,6 +430,7 @@ const sidebarOpen = ref(false)
 
 
 onMounted(() => {
+  getfnt(),
   getData(),
   edit()
 
@@ -408,3 +439,10 @@ onMounted(() => {
 
 
 </script>
+<style scoped>
+.p-treeselect {
+  width: 100%;
+ height: 47px;
+}
+
+</style>

@@ -243,21 +243,44 @@
               <input v-model="name" id="name" name="name" type="name" autocomplete="name" required="" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  />
             </div>
           </div>
-         
+            <div class="space-x-2">
+              <span class="px-3 py-2 bg-green-500 rounded text-white shadow-lg" v-for="item in nodeBinding" :key="item.id">{{item.name}} : {{item.permission}}</span>
+            </div>
          <div>
+          
          
             <label for="role" class="block text-sm font-medium text-gray-700"> Role </label>
             <div class="mt-1">
 
-                <MultiSelect v-model="role" :options="permissionList" optionLabel="name" optionValue="code" placeholder="Select Role" display="chip" />
-
+             <div>
+             <TreeSelect v-model="permission"  display="" selectionMode="checkbox"   :options="role" value></TreeSelect>
+          </div>
+        
+          </div>
+            <div>
+                   <div class="space-x-2 pt-5 pb-5">
+              <span class="px-3 py-2 bg-green-500 rounded text-white shadow-lg" v-for="item in nodeBinding2" :key="item.id">{{item.name}} : {{item.permission2}}</span>
+            </div>
+          
+          <div>
+         
+          </div>
+  <div>
+             <label for="permission" name="permission" class="block text-sm font-medium text-gray-700"> Functions </label>
+            <div>
+             <TreeSelect v-model="permission2"  display="" selectionMode="checkbox"   :options="fnt" value></TreeSelect>
+          </div>
+          <div>
+          </div>
+          </div>
+          
             </div>
           </div>
 
         
        
           <div>
-            <button @click="edit" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create Function</button>
+            <button @click="edit" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Update Group</button>
             <p>
             
             </p>
@@ -278,7 +301,7 @@
 <script setup>
 import MultiSelect from 'primevue/multiselect';
 import axios from 'axios'
-import { ref, onMounted} from 'vue'
+import { ref, onMounted, computed} from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import {
   Dialog,
@@ -298,82 +321,69 @@ import Nav from './components/nav.vue'
 
 
 const name = ref('');
-const role = ref('');
+const permission = ref([]);
 
-const permissionList = [
-    {name: 'User', code: 'User'},
-    {name: 'Admin', code: 'Admin'},
-   
-]
+const role = ref([]);
+const fnt = ref([]);
+const permission2 = ref([]);
 
-const navigation = [
-  { name: 'Home', href: '#', icon: HomeIcon, current: true },
-  { name: 'My tasks', href: '#', icon: ViewListIcon, current: false },
-  { name: 'Recent', href: '#', icon: ClockIcon, current: false },
-]
 
 const route = useRoute()
-
-const teams = [
-  { name: 'Engineering', href: '#', bgColorClass: 'bg-indigo-500' },
-  { name: 'Human Resources', href: '#', bgColorClass: 'bg-green-500' },
-  { name: 'Customer Success', href: '#', bgColorClass: 'bg-yellow-500' },
-]
-
-
-const projects = [
-  {
-    id: 1,
-    title: 'GraphQL API',
-    initials: 'GA',
-    team: 'Engineering',
-    members: [
-      {
-        name: 'Dries Vincent',
-        handle: 'driesvincent',
-        imageUrl:
-          'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-      {
-        name: 'Lindsay Walton',
-        handle: 'lindsaywalton',
-        imageUrl:
-          'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-      {
-        name: 'Courtney Henry',
-        handle: 'courtneyhenry',
-        imageUrl:
-          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-      {
-        name: 'Tom Cook',
-        handle: 'tomcook',
-        imageUrl:
-          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-    ],
-    totalMembers: 12,
-    lastUpdated: 'March 17, 2020',
-    pinned: true,
-    bgColorClass: 'bg-pink-600',
-  },
-  // More projects...
-]
 
 
 const getData = () => {
   axios.get(`/group/${route.params.id}`).then(res => {
-  
-  
     name.value = res.data.name;
-    form.value =  res.data.role;
-   
-    
-   
-   
   })
 }
+
+const getrole = () => {
+  axios.get('/back-end/role2').then(res => {
+   role.value = res.data.role;
+  })
+}
+
+const nodeBinding = computed(() => {
+  let results = [];
+  role.value.forEach(parent => {
+    let permissions = '';
+    let func = null;
+    parent.children.forEach((child,index) => {
+      if(Object.keys(permission.value).includes(child.key)) {
+        permissions = permissions + (index !=0 ? "#"+child.label : child.label);
+        func = {id: parent.key, name: parent.label, permission: permissions};
+      }
+    });
+    results.push(func);
+  })
+  return results.filter(item => item != null);
+}
+)
+
+const getfnt = () => {
+  axios.get('/back-end/fnt2').then(res => {
+   fnt.value = res.data.fnt;
+  })
+}
+
+
+
+const nodeBinding2 = computed(() => {
+  let results = [];
+  fnt.value.forEach(parent => {
+    let permissions2 = '';
+    let func2 = null;
+    parent.children.forEach((child,index) => {
+      if(Object.keys(permission2.value).includes(child.key)) {
+        permissions2 = permissions2 + (index !=0 ? "#"+child.label : child.label);
+        func2 = {id: parent.key, name: parent.label, permission2: permissions2};
+      }
+    });
+    results.push(func2);
+  })
+  return results.filter(item => item != null);
+}
+)
 
 
 
@@ -385,7 +395,7 @@ const edit = async (e) => {
    axios.post(`/edit/group/${route.params.id}` ,{
     
  name : name.value,
- role : role.value.join('#')
+ role : nodeBinding.value,
 
    }).then((response) => {
                return alert ('User updated')
@@ -398,11 +408,22 @@ const sidebarOpen = ref(false)
 
 
 onMounted(() => {
-  getData(),
-  edit()
+  getrole(),
+  getfnt(),
+  getData()
+  
 
   
 })
 
 
 </script>
+
+
+<style scoped>
+.p-treeselect {
+  width: 100%;
+ height: 47px;
+}
+
+</style>

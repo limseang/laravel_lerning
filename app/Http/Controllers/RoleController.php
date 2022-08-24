@@ -44,6 +44,35 @@ class RoleController extends Controller
         $role->save();
         return response()->json($role);
     }
+
+    //show all role
+    public function showAll()
+    {
+        $role = Role::all();
+        return response()->json($role);
+    }
+
+    public function index2(Request $request)
+    {
+        $role = Role::select('id as key' , 'name as label', 'name as data',)->get();
+        // [
+        //     {key:1, label:'admin', data:'admin',children:''},
+        // ]
+        $role->map(function ($item) {
+            $permissions = explode('#', $item->permission);
+            $permissionObject = [];
+            foreach ($permissions as $key => $value) {
+                $permissionObject[] = [
+                    'key' => $item->key."-".$key,
+                    'label' => $value,
+                    'data' => $value,
+                ];                
+            }
+            $item->children = $permissionObject;
+            return $item;
+        });
+        return response(['role'=>$role]);
+    }
  
 
 

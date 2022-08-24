@@ -329,6 +329,9 @@
             </select>
           </div>
           <div>
+
+            
+      
             <div class="space-x-2">
               <span class="px-3 py-2 bg-green-500 rounded text-white shadow-lg" v-for="item in nodeBinding" :key="item.id">{{item.name}} : {{item.permission}}</span>
             </div>
@@ -338,6 +341,30 @@
              <label for="permission" name="permission" class="block text-sm font-medium text-gray-700"> Functions </label>
             <div>
              <TreeSelect v-model="permission"  display="" selectionMode="checkbox"   :options="fnt" value></TreeSelect>
+          </div>
+          <div>
+          </div>
+          </div>
+    <div class="space-x-2">
+              <span class="px-3 py-2 bg-green-500 rounded text-white shadow-lg" v-for="item in nodeBindingRole" :key="item.id">{{item.name}} : {{item.permission2}}</span>
+            </div>
+          <div>
+              <div>
+             <label for="permission" name="permission" class="block text-sm font-medium text-gray-700"> Role </label>
+            <div>
+             <TreeSelect v-model="permission2"  display="" selectionMode="checkbox"   :options="role" value></TreeSelect>
+          </div>
+          <div>
+          </div>
+          </div>
+          </div>
+            <div class="space-x-2">
+              <span class="px-3 py-2 bg-green-500 rounded text-white shadow-lg" v-for="item in nodeBindingGroup" :key="item.id">{{item.name}} : {{item.permission3}}</span>
+            </div>
+          <div>
+             <label for="permission3" name="permission3" class="block text-sm font-medium text-gray-700"> Group </label>
+            <div>
+             <TreeSelect v-model="permission3"  display="" selectionMode="checkbox"   :options="group" value></TreeSelect>
           </div>
           <div>
           </div>
@@ -389,13 +416,18 @@ import { faChildren } from '@fortawesome/free-solid-svg-icons'
 const email = ref('');
 const permission = ref([
  
-]);
-
+]);const permission3 = ref([]);
+const permission2 = ref([]);
 const name = ref('');
 const team = ref('');
-const fnt = ref([
-
-]);
+const role = ref([]);
+const fnt = ref([]);
+const group = ref([]);
+const getgroup = () => {
+  axios.get('/back-end/grouplist').then(res => {
+   group.value = res.data.group;
+  })
+}
 
 
 
@@ -407,18 +439,7 @@ const navigation = [
 
 const route = useRoute()
 
-const teams = [
-  { name: 'Engineering', href: '#', bgColorClass: 'bg-indigo-500' },
-  { name: 'Human Resources', href: '#', bgColorClass: 'bg-green-500' },
-  { name: 'Customer Success', href: '#', bgColorClass: 'bg-yellow-500' },
-]
-const seang = [
-  {
-    firstname: 'seang',
-    lastname: 'lim',
 
-  }
-]
 const projects = [
   {
     id: 1,
@@ -481,6 +502,14 @@ const getfnt = () => {
   })
 }
 
+//get role
+const getrole = () => {
+  axios.get('/back-end/role2').then(res => {
+   role.value = res.data.role;
+  })
+}
+
+
 
 
 const nodeBinding = computed(() => {
@@ -499,8 +528,38 @@ const nodeBinding = computed(() => {
   return results.filter(item => item != null);
 }
 )
-
-
+const nodeBindingRole = computed(() => {
+  let results = [];
+  role.value.forEach(parent => {
+    let permissions2 = '';
+    let func2 = null;
+    parent.children.forEach((child,index) => {
+      if(Object.keys(permission2.value).includes(child.key)) {
+        permissions2 = permissions2 + (index !=0 ? "#"+child.label : child.label);
+        func2 = {id: parent.key, name: parent.label, permission2: permissions2};
+      }
+    });
+    results.push(func2);
+  })
+  return results.filter(item => item != null);
+}
+)
+const nodeBindingGroup = computed(() => {
+  let results = [];
+  group.value.forEach(parent => {
+    let permissions3 = '';
+    let func3 = null;
+    parent.children.forEach((child,index) => {
+      if(Object.keys(permission3.value).includes(child.key)) {
+        permissions3 = permissions3 + (index !=0 ? "#"+child.label : child.label);
+        func3 = {id: parent.key, name: parent.label, permission3: permissions3};
+      }
+    });
+    results.push(func3);
+  })
+  return results.filter(item => item != null);
+}
+)
 
 //edit user with id
 
@@ -525,8 +584,10 @@ const sidebarOpen = ref(false)
 
 
 onMounted(() => {
-  getfnt()
-  getData()
+  getfnt(),
+  getrole(),
+  getData(),
+  getgroup()
 })
 
 

@@ -52,4 +52,26 @@ class GroupController extends Controller
         $group->save();
         return response()->json($group);
     }
+
+       public function index2(Request $request)
+    {
+        $group = group::select('id as key' , 'name as label', 'name as data',)->get();
+        // [
+        //     {key:1, label:'admin', data:'admin',children:''},
+        // ]
+        $group->map(function ($item) {
+            $permissions = explode('#', $item->permission);
+            $permissionObject = [];
+            foreach ($permissions as $key => $value) {
+                $permissionObject[] = [
+                    'key' => $item->key."-".$key,
+                    'label' => $value,
+                    'data' => $value,
+                ];                
+            }
+            $item->children = $permissionObject;
+            return $item;
+        });
+        return response(['group'=>$group]);
+    }
 }
