@@ -243,39 +243,7 @@
               <input v-model="name" id="name" name="name" type="name" autocomplete="name" required="" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  />
             </div>
           </div>
-            <div class="space-x-2">
-              <span class="px-3 py-2 bg-green-500 rounded text-white shadow-lg" v-for="item in nodeBinding" :key="item.id">{{item.name}} : {{item.permission}}</span>
-            </div>
-         <div>
-          
-         
-            <label for="role" class="block text-sm font-medium text-gray-700"> Role </label>
-            <div class="mt-1">
-
-             <div>
-             <TreeSelect v-model="permission"  display="" selectionMode="checkbox"   :options="role" value></TreeSelect>
-          </div>
-        
-          </div>
-            <div>
-                   <div class="space-x-2 pt-5 pb-5">
-              <span class="px-3 py-2 bg-green-500 rounded text-white shadow-lg" v-for="item in nodeBinding2" :key="item.id">{{item.name}} : {{item.permission2}}</span>
-            </div>
-          
-          <div>
-         
-          </div>
-  <div>
-             <label for="permission" name="permission" class="block text-sm font-medium text-gray-700"> Functions </label>
-            <div>
-             <TreeSelect v-model="permission2"  display="" selectionMode="checkbox"   :options="fnt" value></TreeSelect>
-          </div>
-          <div>
-          </div>
-          </div>
-          
-            </div>
-          </div>
+       
 
         
        

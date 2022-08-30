@@ -139,7 +139,7 @@
        <div>
        <div class="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <div class="flex-1 min-w-0">
-            <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">Home</h1>
+            <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">Role</h1>
           </div>
           <div class="mt-4 flex sm:mt-0 sm:ml-4">
            
@@ -168,7 +168,7 @@
         <div class="inline-block min-w-full py-2 align-middle">
           <div class="overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5">
             <table class="min-w-full divide-y divide-gray-300">
-              <thead class="bg-gray-50">
+              <thead class="">
                 <tr  >
                
               <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">ID</th>
@@ -245,7 +245,6 @@
 
 import axios from 'axios'
 import { ref,onMounted,reactive } from 'vue'
-import { CheckCircleIcon } from '@heroicons/vue/solid'
 import { useRoute } from 'vue-router'
 import {
   Dialog,
@@ -258,21 +257,14 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 
-import { ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon } from '@heroicons/vue/outline'
+import { MenuAlt1Icon,  XIcon } from '@heroicons/vue/outline'
 
-import { ChevronRightIcon, DotsVerticalIcon, SearchIcon, SelectorIcon } from '@heroicons/vue/solid'
+import {  SearchIcon, SelectorIcon } from '@heroicons/vue/solid'
 import Logo from './components/logo.vue'
 import Nav from './components/nav.vue'
-import Header from './components/header.vue'
 import { useRouter } from 'vue-router'
 
 const role = ref([]);
-
-const navigation = [
-  { name: 'Home', href: '#', icon: HomeIcon, current: true },
-  { name: 'My tasks', href: '#', icon: ViewListIcon, current: false },
-  { name: 'Recent', href: '#', icon: ClockIcon, current: false },
-]
 
 function add_role() {
 
@@ -289,8 +281,8 @@ const deleteu =(id)=>{
     }
   })
   if(deleteu){
-   alert('这是一段内容', '标题名称', {
-    confirmButtonText: '确定',
+   alert('Want to delete it?', 'Delete', {
+    confirmButtonText: 'Yes',
     callback: action => {
       
     }
@@ -305,20 +297,7 @@ const deleteu =(id)=>{
    
   })
 }
-
-
 const router = useRouter()
-
-const teams = [
-  { name: 'Engineering', href: '#', bgColorClass: 'bg-indigo-500' },
-  { name: 'Human Resources', href: '#', bgColorClass: 'bg-green-500' },
-  { name: 'Customer Success', href: '#', bgColorClass: 'bg-yellow-500' },
-]
-
-const seang = [
-  { firstname: 'seang', lastname: 'lim', possision: 'admin' },
-  
-]
 
 function editrole(idrole) {
   console.log(idrole)
@@ -331,101 +310,9 @@ function editrole(idrole) {
      
     }
 
-
-const name = ref('')
-const count = reactive({
-  abc: 0,
-  cambodia: 0,
-  ancher: 0,
-});
-
-
-
-
-
-
-
-
-
-
-
-
 const pagination = ref({});
 
-const projects = [
-  {
-    id: 1,
-   
-    title: 'GraphQL API',
-    initials: 'GA',
-    team: 'Engineering',
-    members: [
-      {
-        name: 'Dries Vincent',
-        handle: 'driesvincent',
-        imageUrl:
-          'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-      {
-        name: 'Lindsay Walton',
-        handle: 'lindsaywalton',
-        imageUrl:
-          'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-      {
-        name: 'Courtney Henry',
-        handle: 'courtneyhenry',
-        imageUrl:
-          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-      {
-        name: 'Tom Cook',
-        handle: 'tomcook',
-        imageUrl:
-          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-    ],
-    totalMembers: 12,
-   
-    lastUpdated: 'March 17, 2020',
-    pinned: true,
-    bgColorClass: 'bg-pink-600',
-  },
-  // More projects...
-]
-const pinnedProjects = projects.filter((project) => project.pinned)
-
 const sidebarOpen = ref(false)
-
-
-
-
-
-function viewuser(iduser) {
-
-      router.push({
-        name: 'viewuser',
-       params: {
-          id:iduser,
-        },
-      })
-    }
-
- 
-function deletefnt(idfnt) {
-  console.log(idfnt)
-      router.push({
-        name: 'deletefnt',
-        params: {
-          id:idfnt,
-        },
-      })
-    }
-
- 
-
-
-
 
 onMounted(() => {
   getData();

@@ -163,12 +163,9 @@
        <div>
        <div class="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <div class="flex-1 min-w-0">
-            <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">Home</h1>
+            <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">Create Role</h1>
           </div>
-          <div class="mt-4 flex sm:mt-0 sm:ml-4">
-           
-            <button  @click="add" type="button" class="order-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3">Create Function</button>
-          </div>
+         
         </div>
        
        </div>
@@ -199,20 +196,12 @@
             </div>
           </div>
          
-           <div>
-         
-            <label for="fnt" class="block text-sm font-medium text-gray-700"> Function </label>
-            <div class="mt-1">
-
-                <MultiSelect v-model="form.fnt" :options="permissionList" optionLabel="name" optionValue="code" placeholder="Select Permission" display="chip" />
-
-            </div>
-          </div>
+           
 
         
        
           <div>
-            <button @click="handleSubmit" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create Function</button>
+            <button @click="handleSubmit" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create Role</button>
             <p>
             
             </p>
@@ -248,84 +237,29 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 
-import { ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon } from '@heroicons/vue/outline'
+import {  MenuAlt1Icon,  XIcon } from '@heroicons/vue/outline'
 
-import { ChevronRightIcon, DotsVerticalIcon, SearchIcon, SelectorIcon } from '@heroicons/vue/solid'
+import {  SearchIcon, SelectorIcon } from '@heroicons/vue/solid'
 import Logo from './components/logo.vue'
 import Nav from './components/nav.vue'
-import Header from './components/header.vue'
+
 import { useRouter } from 'vue-router'
-
-const navigation = [
-  { name: 'Home', href: '#', icon: HomeIcon, current: true },
-  { name: 'My tasks', href: '#', icon: ViewListIcon, current: false },
-  { name: 'Recent', href: '#', icon: ClockIcon, current: false },
-]
-
-
-const router = useRouter()
-
-const teams = [
-  { name: 'Engineering', href: '#', bgColorClass: 'bg-indigo-500' },
-  { name: 'Human Resources', href: '#', bgColorClass: 'bg-green-500' },
-  { name: 'Customer Success', href: '#', bgColorClass: 'bg-yellow-500' },
-]
-
-const seang = [
-  { firstname: 'seang', lastname: 'lim', possision: 'admin' },
-  
-]
-
-const name = ref('')
-const count = reactive({
-  abc: 0,
-  cambodia: 0,
-  ancher: 0,
-});
-const deleteu =(id)=>{
-  axios.post(`/delete/user/${id}/`,{
-    params:{
-      id:id,
-      
-    }
-  }).then(res=>{
-    console.log(res)
-  }).catch(err=>{
-    console.log(err)
-  })
-}
-
-
-
-
-
-
-
-
 
 
 
 
 const sidebarOpen = ref(false)
 
-
-const permissionList = [
-    {name: 'View', code: 'VIEW'},
-    {name: 'Read', code: 'READ'},
-    {name: 'Upadte', code: 'UPD'},
-    {name: 'Delete', code: 'DEL'},
-   
-];
 const form = reactive({
   name: '',
-  fnt: '',
+ 
 });
 
 const handleSubmit = (e) => {  
   e.preventDefault()
  axios.post('/create_role', {
   name: form.name,
-    fnt: form.fnt.join('#'),
+   
  })
   .then(function (response) {
    alert("Successfully registered");
@@ -334,18 +268,6 @@ const handleSubmit = (e) => {
     console.log(error);
   });
 }
-
-
-
-
-
-
-
-
-onMounted(() => {
-
-
-})
 
 
 </script>

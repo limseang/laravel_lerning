@@ -250,14 +250,7 @@
          <div>
          
            
-             <div>
-             <label for="permission" name="permission" class="block text-sm font-medium text-gray-700"> Functions </label>
-            <div>
-             <TreeSelect v-model="permission"  display="" selectionMode="checkbox"   :options="fnt" value></TreeSelect>
-          </div>
-          <div>
-          </div>
-          </div>
+            
           </div>
 
         
@@ -375,7 +368,7 @@ const getData = () => {
   
   
     name.value = res.data.name;
-    form.value =  res.data.fnt;
+   
    
     
    
@@ -384,11 +377,7 @@ const getData = () => {
 }
 
 
-const getfnt = () => {
-  axios.get('/back-end/fnt2').then(res => {
-   fnt.value = res.data.fnt;
-  })
-}
+
 
 
 
@@ -417,7 +406,7 @@ const edit = async (e) => {
    axios.post(`/edit/role/${route.params.id}` ,{
     
  name : name.value,
- fnt : fnt.value.join('#')
+ 
 
    }).then((response) => {
                return alert ('User updated')
@@ -430,7 +419,7 @@ const sidebarOpen = ref(false)
 
 
 onMounted(() => {
-  getfnt(),
+  
   getData(),
   edit()
 

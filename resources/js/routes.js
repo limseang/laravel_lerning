@@ -147,7 +147,7 @@ export default [
     component: addgroup,
 },
 {
-    path:'/admin/edit_group',
+    path:'/admin/edit_group/:id',
     name: 'edit_group',
     component: editgroup,
 }

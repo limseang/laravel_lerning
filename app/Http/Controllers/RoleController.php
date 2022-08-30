@@ -12,7 +12,7 @@ class RoleController extends Controller
     {
         $role = new Role();
         $role->name = $request->name;
-        $role->fnt = $request->fnt;
+       
         $role->save();
        
         return response()->json($role);
@@ -40,7 +40,6 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         $role->name = $request->name;
-        $role->fnt = $request->fnt;
         $role->save();
         return response()->json($role);
     }

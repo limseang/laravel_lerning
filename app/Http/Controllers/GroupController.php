@@ -11,7 +11,7 @@ class GroupController extends Controller
     {
         $group = new Group();
         $group->name = $request->name;
-        $group->role = $request->role;
+       
         $group->save();
        
         return response()->json($group);
@@ -39,7 +39,7 @@ class GroupController extends Controller
     {
         $group = Group::find($id);
         $group->name = $request->name;
-        $group->role = $request->role;
+     
         $group->save();
         return response()->json($group);
     }
@@ -48,7 +48,7 @@ class GroupController extends Controller
     public function join(Request $request, $id)
     {
         $group = Group::find($id);
-        $group->role = $request->role;
+       
         $group->save();
         return response()->json($group);
     }

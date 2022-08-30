@@ -138,13 +138,21 @@
       </div>
       <main class="flex-1">
         <!-- Page title & actions -->
-       <Header />
+      <div class="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+          <div class="flex-1 min-w-0">
+            <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">User</h1>
+          </div>
+          <div class="mt-4 flex sm:mt-0 sm:ml-4">
+           
+            <button  @click="add" type="button" class="order-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3">Create</button>
+          </div>
+        </div>
         <!-- Pinned projects -->
       
     
  <div class="mt-10 pb-12 bg-white sm:pb-16">
       <div class="relative">
-        <div class="absolute inset-0 h-1/2 bg-gray-50" />
+        <div class="absolute inset-0 h-1/2 " />
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-7">
           <div class="max-w-4xl mx-auto">
             <dl class="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-4">
@@ -178,14 +186,14 @@
       <div class="sm:flex-auto">
       <!--User Table-->
       </div>
-  <font-awesome-icon icon="fa-brands fa-twitter" />
+  
     </div>
     <div class="mt-8 flex flex-col">
       <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 align-middle">
           <div class="overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5">
             <table class="min-w-full divide-y divide-gray-300">
-              <thead class="bg-gray-50">
+              <thead class="">
                 <tr  >
                
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">ID</th>
@@ -287,7 +295,13 @@ const router = useRouter()
 const selectPermission = ref();
 
 
+function add() {
 
+      router.push({
+        name: 'add',
+       
+      })
+    }
 
 const count = reactive({
   abc: 0,

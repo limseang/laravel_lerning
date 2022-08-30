@@ -44,7 +44,7 @@
                 <span class="flex min-w-0 items-center justify-between space-x-3">
                   <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="" />
                   <span class="flex-1 flex flex-col min-w-0">
-                    <span class="text-gray-900 text-sm font-medium truncate" >Add-role</span>
+                    <span class="text-gray-900 text-sm font-medium truncate" >Group</span>
                     <span class="text-gray-500 text-sm truncate"> @admin</span>
                   </span>
                 </span>
@@ -163,7 +163,7 @@
        <div>
        <div class="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <div class="flex-1 min-w-0">
-            <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">Home</h1>
+            <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">Create Group</h1>
           </div>
           <div class="mt-4 flex sm:mt-0 sm:ml-4">
            
@@ -172,12 +172,10 @@
         </div>
        
        </div>
-        <!-- Pinned projects -->
-      
-    
- 
-        <!-- Projects list (only on smallest breakpoint) -->
-       <!-- This example requires Tailwind CSS v2.0+ -->
+
+
+
+
 
   <div class="px-4 sm:px-6 lg:px-8">
     <div class="sm:flex sm:items-center">
@@ -199,20 +197,11 @@
             </div>
           </div>
          
-           <div>
-         
-            <label for="fnt" class="block text-sm font-medium text-gray-700"> Role </label>
-            <div class="mt-1">
-
-                <MultiSelect v-model="form.role" :options="permissionList" optionLabel="name" optionValue="code" placeholder="Select Role" display="chip" />
-
-            </div>
-          </div>
-
+        
         
        
           <div>
-            <button @click="handleSubmit" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create Function</button>
+            <button @click="handleSubmit" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create Group</button>
             <p>
             
             </p>
@@ -222,8 +211,6 @@
 </div>
   </div>
 
-
-        <!-- Projects table (small breakpoint and up) -->
       
       </main>
       
@@ -233,10 +220,10 @@
 </template>
 
 <script setup>
-import MultiSelect from 'primevue/multiselect';
+
 import axios from 'axios'
 import { ref,onMounted,reactive } from 'vue'
-import { useRoute } from 'vue-router'
+
 import {
   Dialog,
   DialogPanel,
@@ -253,7 +240,6 @@ import { ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon } from '@heroico
 import { ChevronRightIcon, DotsVerticalIcon, SearchIcon, SelectorIcon } from '@heroicons/vue/solid'
 import Logo from './components/logo.vue'
 import Nav from './components/nav.vue'
-import Header from './components/header.vue'
 import { useRouter } from 'vue-router'
 
 const navigation = [
@@ -289,14 +275,14 @@ const permissionList = [
 ];
 const form = reactive({
   name: '',
-  role: '',
+  
 });
 
 const handleSubmit = (e) => {  
   e.preventDefault()
  axios.post('/create_group', {
   name: form.name,
-    role: form.role.join('#'),
+   
  })
   .then(function (response) {
    alert("Successfully registered");

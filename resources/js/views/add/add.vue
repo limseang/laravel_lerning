@@ -151,25 +151,7 @@
               </div>
               <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
                 <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
-                  <div class="py-1">
-                    <MenuItem v-slot="{ active }">
-                      <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">View profile</a>
-                    </MenuItem>
-                    <MenuItem v-slot="{ active }">
-                      <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Settings</a>
-                    </MenuItem>
-                    <MenuItem v-slot="{ active }">
-                      <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Notifications</a>
-                    </MenuItem>
-                  </div>
-                  <div class="py-1">
-                    <MenuItem v-slot="{ active }">
-                      <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Get desktop app</a>
-                    </MenuItem>
-                    <MenuItem v-slot="{ active }">
-                      <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Support</a>
-                    </MenuItem>
-                  </div>
+          
                   <div class="py-1">
                     <MenuItem v-slot="{ active }">
                       <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Logout</a>
@@ -192,27 +174,9 @@
         <!-- Pinned projects -->
       
 
+
         <!-- Projects list (only on smallest breakpoint) -->
-        <div class="mt-10 sm:hidden">
-          <div class="px-4 sm:px-6">
-            <h2 class="text-gray-500 text-xs font-medium uppercase tracking-wide">Projects</h2>
-          </div>
-          <ul role="list" class="mt-3 border-t border-gray-200 divide-y divide-gray-100">
-            <li v-for="project in projects" :key="project.id">
-              <a href="#" class="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6">
-                <span class="flex items-center truncate space-x-3">
-                  <span :class="[project.bgColorClass, 'w-2.5 h-2.5 flex-shrink-0 rounded-full']" aria-hidden="true" />
-                  <span class="font-medium truncate text-sm leading-6">
-                    {{ project.title }}
-                    {{ ' ' }}
-                    <span class="truncate font-normal text-gray-500">in {{ project.team }}</span>
-                  </span>
-                </span>
-                <ChevronRightIcon class="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-              </a>
-            </li>
-          </ul>
-        </div>
+      
 
         <!-- Projects table (small breakpoint and up) -->
         <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -224,44 +188,97 @@
 
       <!--signup form-->
 
-        <form class="space-y-6" action="/login/dologin" method="POST">
-        <input type="hidden" name="_token" :value="csrf">
-      
-         <div>
-         
+        <form class="space-y-9 pl-9 pr-9 pt-9" action="" method="POST">
+          <input type="hidden" name="_token" :value="csrf">
+
+          <div>
+
             <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>
             <div class="mt-1">
-              <input id="name" name="name" type="name" autocomplete="name" required="" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" v-model="form.name" />
+              <input v-model="form.name" id="name" name="name" type="name" autocomplete='name' required="name"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
             </div>
           </div>
           <div>
-         
+
+
             <label for="email" class="block text-sm font-medium text-gray-700"> Email address </label>
             <div class="mt-1">
-              <input v-model="form.email" id="email" name="email" type="email" autocomplete="email" required="" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+              <input v-model="form.email" id="email" name="email" type="email" autocomplete="email" required="email"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
             </div>
           </div>
+
 
           <div>
             <label for="password" class="block text-sm font-medium text-gray-700"> Password </label>
             <div class="mt-1">
-              <input v-model="form.password" id="password" name="password" type="password" autocomplete="current-password" required="" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+              <input id="password" name="password" type="password" autocomplete="current-password"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                v-model="form.password" />
             </div>
           </div>
           <div>
-<select id="team" name="team" type="team" v-model="form.team" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-      <option>ABC</option>
-      <option selected="">Cambodia</option>
-      <option>Ancher</option>
-    </select>
-</div>
-          <div>
-            <button @click="handleSubmit" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Sign in</button>
-            <p>
-            
-            </p>
+            <label for="team" class="block text-sm font-medium text-gray-700"> Team </label>
+            <select id="team" name="team" type="team" v-model="form.teams"
+              class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+              <option>ABC</option>
+              <option selected="">Cambodia</option>
+              <option>Ancher</option>
+            </select>
           </div>
-         
+          <div>
+
+            
+      
+            <div class="space-x-2">
+              <span class="px-3 py-2 bg-green-500 rounded text-white shadow-lg" v-for="item in nodeBinding" :key="item.id">{{item.name}} : {{item.permission}}</span>
+            </div>
+           
+          </div>
+          <div>
+             <label for="permission" name="permission" class="block text-sm font-medium text-gray-700"> Functions </label>
+            <div>
+             <TreeSelect v-model="permission"  display="" selectionMode="checkbox"   :options="fnt" value></TreeSelect>
+          </div>
+          <div>
+          </div>
+          </div>
+    <div class="space-x-2">
+              <span class="px-3 py-2 bg-green-500 rounded text-white shadow-lg" v-for="item in nodeBindingRole" :key="item.id">{{item.name}} : {{item.permission2}}</span>
+            </div>
+          <div>
+              <div>
+             <label for="permission" name="permission" class="block text-sm font-medium text-gray-700"> Role </label>
+            <div>
+             <TreeSelect v-model="permission2"  display="" selectionMode="checkbox"   :options="role" value></TreeSelect>
+          </div>
+          <div>
+          </div>
+          </div>
+          </div>
+            <div class="space-x-2">
+              <span class="px-3 py-2 bg-green-500 rounded text-white shadow-lg" v-for="item in nodeBindingGroup" :key="item.id">{{item.name}} : {{item.permission3}}</span>
+            </div>
+          <div>
+             <label for="permission3" name="permission3" class="block text-sm font-medium text-gray-700"> Group </label>
+            <div>
+             <TreeSelect v-model="permission3"  display="" selectionMode="checkbox"   :options="group" value></TreeSelect>
+          </div>
+          <div>
+          </div>
+          </div>
+
+          <div>
+            <button @click="handleSubmit" type="submit"
+            
+              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Update</button>
+            <p>
+
+            </p>
+
+          </div>
+
         </form>
 
       
@@ -274,7 +291,7 @@
 </template>
 
 <script setup>
-import { ref,reactive } from 'vue'
+import { ref,reactive,computed, onMounted } from 'vue'
 import axios from 'axios'
 import {
   Dialog,
@@ -311,55 +328,100 @@ const teams = [
   { name: 'Human Resources', href: '#', bgColorClass: 'bg-green-500' },
   { name: 'Customer Success', href: '#', bgColorClass: 'bg-yellow-500' },
 ]
-const projects = [
-  {
-    id: 1,
-    title: 'GraphQL API',
-    initials: 'GA',
-    team: 'Engineering',
-    members: [
-      {
-        name: 'Dries Vincent',
-        handle: 'driesvincent',
-        imageUrl:
-          'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-      {
-        name: 'Lindsay Walton',
-        handle: 'lindsaywalton',
-        imageUrl:
-          'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-      {
-        name: 'Courtney Henry',
-        handle: 'courtneyhenry',
-        imageUrl:
-          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-      {
-        name: 'Tom Cook',
-        handle: 'tomcook',
-        imageUrl:
-          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-    ],
-    totalMembers: 12,
-    lastUpdated: 'March 17, 2020',
-    pinned: true,
-    bgColorClass: 'bg-pink-600',
-  },
-  // More projects...
-]
 
-const testVar = ref("dara");
+
+
+const fnt = ref([]);
+const role = ref([]);
+const permission = ref([]);
+const permission2 = ref([]);
+const permission3 = ref([]);
+
+const group = ref([]);
 const form = reactive({
   
   name: '',
   email: '',
   password: '',
-  team:'',
+  teams:'',
+  
 })
+const getgroup = () => {
+  axios.get('/back-end/grouplist').then(res => {
+   group.value = res.data.group;
+  })
+}
+const getfnt = () => {
+  axios.get('/back-end/fnt2').then(res => {
+   fnt.value = res.data.fnt;
+  })
+}
 
+//get role
+const getrole = () => {
+  axios.get('/back-end/role2').then(res => {
+   role.value = res.data.role;
+  })
+}
+
+
+
+
+const nodeBinding = computed(() => {
+  let results = [];
+  fnt.value.forEach(parent => {
+    let permissions = '';
+    let func = null;
+    parent.children.forEach((child,index) => {
+      if(Object.keys(permission.value).includes(child.key)) {
+        permissions = permissions + (index !=0 ? "#"+child.label : child.label);
+        func = {id: parent.key, name: parent.label, permission: permissions};
+      }
+    });
+    results.push(func);
+  })
+  return results.filter(item => item != null);
+}
+)
+const nodeBindingRole = computed(() => {
+  let results = [];
+  role.value.forEach(parent => {
+    let permissions2 = '';
+    let func2 = null;
+    parent.children.forEach((child,index) => {
+      if(Object.keys(permission2.value).includes(child.key)) {
+        permissions2 = permissions2 + (index !=0 ? "#"+child.label : child.label);
+        func2 = {id: parent.key, name: parent.label, permission2: permissions2};
+      }
+    });
+    results.push(func2);
+  })
+  return results.filter(item => item != null);
+}
+)
+const nodeBindingGroup = computed(() => {
+  let results = [];
+  group.value.forEach(parent => {
+    let permissions3 = '';
+    let func3 = null;
+    parent.children.forEach((child,index) => {
+      if(Object.keys(permission3.value).includes(child.key)) {
+        permissions3 = permissions3 + (index !=0 ? "#"+child.label : child.label);
+        func3 = {id: parent.key, name: parent.label, permission3: permissions3};
+      }
+    });
+    results.push(func3);
+  })
+  return results.filter(item => item != null);
+}
+)
+
+  onMounted(() => {
+  getfnt(),
+  getrole(),
+ 
+  getgroup()
+})
 
 const sidebarOpen = ref(false)
 
@@ -369,8 +431,8 @@ const handleSubmit = (e) => {
  axios.post('/register', {
   name: form.name,
   email: form.email,
-  team: form.team,
-  password: form.password,
+  team: permission3.value.join(':'),
+  team: form.teams
  })
   .then(function (response) {
    alert("Successfully registered");
@@ -378,6 +440,15 @@ const handleSubmit = (e) => {
   .catch(function (error) {
     console.log(error);
   });
+
+
 }
 
 </script>
+<style scoped>
+.p-treeselect {
+  width: 100%;
+ height: 47px;
+}
+
+</style>

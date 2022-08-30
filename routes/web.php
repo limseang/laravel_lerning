@@ -48,7 +48,7 @@ Route::get('/count2/user/', [RegisterController::class, 'count2']);
 Route::get('/count3/user/', [RegisterController::class, 'count3']);
 Route::post('/delete/user/{id}', [RegisterController::class, 'destroy']);
 
-Route::post('register',[RegisterController::class, 'register']);
+Route::post('/register',[RegisterController::class, 'register']);
 
 
 
@@ -72,6 +72,7 @@ Route::post('/delete/fnt/{id}', [FuntionController::class, 'destroy']);
 Route::get('/back-end/role', [RoleController::class, 'index']);
 Route::post('/delete/role/{id}', [RoleController::class, 'destroy']);
 Route::get('/back-end/role2', [RoleController::class, 'index2']); 
+Route::post('/edit/role/{id}', [RoleController::class, 'edit']);
 Route::get('role/{id}', [RoleController::class, 'show']);
 Route::get('role/showAll', [RoleController::class, 'showAll']);
 
